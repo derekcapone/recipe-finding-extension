@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import request_handler
+import database_driver
 
 app = Flask(__name__)
 
@@ -7,13 +7,16 @@ app = Flask(__name__)
 # Route to handle GET requests for "get_recipes"
 @app.route('/get_recipes', methods=['GET'])
 def get_recipes():
-    request_handler.external_function()
     return "These are recipes!"
 
 
 # Route to handle POST requests for "set_pantry_essentials"
 @app.route('/set_pantry_essentials', methods=['POST'])
 def set_pantry_essentials():
+    # Get JSON data from the request body
+    ingredient_data = request.get_json()
+
+    database_driver.insert_pantry_essentials(ingredient_data)
     return "Setting pantry essentials..."
 
 
