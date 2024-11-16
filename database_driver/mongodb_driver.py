@@ -1,6 +1,5 @@
-from pymongo import MongoClient, errors
-from bson.json_util import dumps
 import json
+import mongodb_cloud_connector
 
 # Load Config file
 with open('config/mongo_config.json', 'r') as file:
@@ -8,13 +7,12 @@ with open('config/mongo_config.json', 'r') as file:
 
 try:
     # Connect to MongoDB (use the default host and port)
-    client = MongoClient(config_data["mongo-client-host"])
+    client = mongodb_cloud_connector.get_cloud_connection_client()
     db = client[config_data["database-name"]]
 
     # Set up all collection objects
     pantry_essentials_collection = db[config_data["pantry-essentials-collection-name"]]
     saved_recipe_collection = db[config_data["saved-recipes-collection-name"]]
-    print("Successfully connected to MongoDB database")
 except Exception as e:
     print(f"MongoDB Error: {str(e)}")
 

@@ -1,5 +1,4 @@
 {
-  "mongo-client-host": "mongodb://localhost:27017/",
   "database-name": "RecipeDatabase",
   "pantry-essentials-collection-name": "pantryEssentials",
   "saved-recipes-collection-name": "savedRecipes"
