@@ -1,8 +1,10 @@
 import json
-import mongodb_cloud_connector
+import database_driver.mongodb_cloud_connector as mongodb_cloud_connector
+import os
 
 # Load Config file
-with open('config/mongo_config.json', 'r') as file:
+config_path = os.path.join(os.path.dirname(__file__), 'config', 'mongo_config.json')
+with open(config_path, 'r') as file:
     config_data = json.load(file)
 
 try:
@@ -12,9 +14,20 @@ try:
 
     # Set up all collection objects
     pantry_essentials_collection = db[config_data["pantry-essentials-collection-name"]]
+    recipe_collection = db[config_data["recipe-list-collection-name"]]
     saved_recipe_collection = db[config_data["saved-recipes-collection-name"]]
 except Exception as e:
     print(f"MongoDB Error: {str(e)}")
+
+
+def insert_recipe_list(recipe_list):
+    try:
+        # Insert entire provided recipe list
+        result = recipe_collection.insert_many(recipe_list)
+    except Exception as e:
+        # Print the type of the exception and the exception message
+        print(f"Exception type: {type(e)}")
+        print(f"Exception message: {str(e)}")
 
 
 def insert_pantry_essentials(ingredient_list: dict):
