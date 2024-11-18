@@ -1,6 +1,7 @@
 import json
 import database_driver.mongodb_cloud_connector as mongodb_cloud_connector
 import os
+from pymongo import ASCENDING, DESCENDING
 
 # Load Config file
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'mongo_config.json')
@@ -62,10 +63,18 @@ def get_pantry_essentials() -> dict:
         print(f"Exception message: {str(e)}")
 
 
-if __name__ == "__main__":
-    ingredients_list = {
-        "ingredients": ["eggs", "milk", "flour", "salt", "pepper"]
-    }
+def create_recipe_list_index(field: str):
+    index_vals = {"keys": [(field, ASCENDING)], "options": {"unique": True}}
+    saved_recipe_collection.create_index(index_vals['keys'], **index_vals['options'])
 
-    insert_pantry_essentials(ingredients_list)
-    pantry_essentials = get_pantry_essentials()
+
+if __name__ == "__main__":
+    # ingredients_list = {
+    #     "ingredients": ["eggs", "milk", "flour", "salt", "pepper"]
+    # }
+    #
+    # insert_pantry_essentials(ingredients_list)
+    # pantry_essentials = get_pantry_essentials()
+
+    field_to_index = "source_url"
+    create_recipe_list_index(field_to_index)
