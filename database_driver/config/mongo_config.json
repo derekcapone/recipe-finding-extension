@@ -1,6 +1,5 @@
 {
   "database-name": "RecipeDatabase",
   "pantry-essentials-collection-name": "pantryEssentials",
-  "saved-recipes-collection-name": "savedRecipes",
   "recipe-list-collection-name": "recipeList"
 }

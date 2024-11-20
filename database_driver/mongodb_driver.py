@@ -16,7 +16,6 @@ try:
     # Set up all collection objects
     pantry_essentials_collection = db[config_data["pantry-essentials-collection-name"]]
     recipe_collection = db[config_data["recipe-list-collection-name"]]
-    saved_recipe_collection = db[config_data["saved-recipes-collection-name"]]
 except Exception as e:
     print(f"MongoDB Error: {str(e)}")
 
@@ -25,6 +24,7 @@ def insert_recipe_list(recipe_list):
     try:
         # Insert entire provided recipe list
         result = recipe_collection.insert_many(recipe_list)
+        print(f"Inserted {len(recipe_list)} new recipes")
     except Exception as e:
         # Print the type of the exception and the exception message
         print(f"Exception type: {type(e)}")
@@ -63,18 +63,10 @@ def get_pantry_essentials() -> dict:
         print(f"Exception message: {str(e)}")
 
 
-def create_recipe_list_index(field: str):
-    index_vals = {"keys": [(field, ASCENDING)], "options": {"unique": True}}
-    saved_recipe_collection.create_index(index_vals['keys'], **index_vals['options'])
-
-
 if __name__ == "__main__":
-    # ingredients_list = {
-    #     "ingredients": ["eggs", "milk", "flour", "salt", "pepper"]
-    # }
-    #
-    # insert_pantry_essentials(ingredients_list)
-    # pantry_essentials = get_pantry_essentials()
+    ingredients_list = {
+        "ingredients": ["eggs", "milk", "flour", "salt", "pepper"]
+    }
 
-    field_to_index = "source_url"
-    create_recipe_list_index(field_to_index)
+    insert_pantry_essentials(ingredients_list)
+    pantry_essentials = get_pantry_essentials()

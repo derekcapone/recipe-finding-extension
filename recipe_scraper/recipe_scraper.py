@@ -10,7 +10,44 @@ API_KEY = os.getenv("SPOONACULAR_APP_ID")
 BASE_URL = 'https://api.spoonacular.com'
 
 
+def scrape_and_insert_recipes(num_recipes: int):
+    # Get random recipes
+    random_recipe_list = get_random_recipes(num_recipes)
+
+    transformed_random_recipes = transform_recipe_structure(random_recipe_list)
+
+    # Ensure each recipe link still works before inserting
+    final_recipe_list = check_recipe_links(transformed_random_recipes)
+    database_driver.insert_recipe_list(final_recipe_list)
+
+
+def check_recipe_links(recipe_list):
+    """
+    Filters list based on whether the source URL is still active
+    :param recipe_list:
+    :return:
+    """
+    filtered_recipes = []
+    for recipe_dict in recipe_list:
+        try:
+            response = requests.head(recipe_dict["source_url"], allow_redirects=True, stream=True)
+            if response.status_code == 200:
+                filtered_recipes.append(recipe_dict)
+                print("Successful link")
+            else:
+                print("Link doesnt work")
+        except requests.RequestException as e:
+            continue
+    return filtered_recipes
+
+
+
 def transform_recipe_structure(recipe_list_obj: dict):
+    """
+    Transform API recipes version of returned recipes to schema used by DB
+    :param recipe_list_obj: list of recipes with API schema
+    :return: List of recipes ready to be inserted into DB
+    """
     recipes_list = [
         {
             "recipe_name": recipe["title"],
@@ -23,6 +60,11 @@ def transform_recipe_structure(recipe_list_obj: dict):
 
 
 def get_random_recipes(num_recipes: int) -> dict:
+    """
+    Scrapes provided number of random recipes from API
+    :param num_recipes: Number of recipes to retrieve
+    :return: dict of "num_recipes" number of random recipes
+    """
     endpoint = '/recipes/random'
     url = f'{BASE_URL}{endpoint}'
 
@@ -38,8 +80,7 @@ def get_random_recipes(num_recipes: int) -> dict:
 
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
-        recipes = response.json()
-        return recipes
+        return response.json()
     else:
         print(f"Error, could not get random recipes: {response.status_code}")
         return None
@@ -62,25 +103,12 @@ def search_recipes_by_ingredient(ingredients: str) -> dict:
 
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
-        recipes = response.json()
-        return recipes
+        return response.json()
     else:
         print(f"Error: {response.status_code}")
         return None
 
 
 if __name__ == "__main__":
-    # numRecipes = 20
-    # recipes = get_random_recipes(numRecipes)
-
-    # Open and load the JSON file
-    with open("config/recipe_output.json", "r") as file:
-        recipes = json.load(file)
-
-    transformed_recipes = transform_recipe_structure(recipes)
-    database_driver.insert_recipe_list(transformed_recipes)
-
-    # if recipes:
-    #     # Write the JSON string to a file
-    #     with open("config/recipe_output.json", "w") as file:
-    #         file.write(json.dumps(recipes, indent=3))
+    numRecipes = 100
+    scrape_and_insert_recipes(numRecipes)
