@@ -17,8 +17,8 @@ def scrape_and_insert_recipes(num_recipes: int):
     transformed_random_recipes = transform_recipe_structure(random_recipe_list)
 
     # Ensure each recipe link still works before inserting
-    final_recipe_list = check_recipe_links(transformed_random_recipes)
-    database_driver.insert_recipe_list(final_recipe_list)
+    valid_recipe_list = check_recipe_links(transformed_random_recipes)
+    database_driver.insert_recipe_list(valid_recipe_list)
 
 
 def check_recipe_links(recipe_list):
@@ -33,9 +33,6 @@ def check_recipe_links(recipe_list):
             response = requests.head(recipe_dict["source_url"], allow_redirects=True, stream=True)
             if response.status_code == 200:
                 filtered_recipes.append(recipe_dict)
-                print("Successful link")
-            else:
-                print("Link doesnt work")
         except requests.RequestException as e:
             continue
     return filtered_recipes
@@ -72,7 +69,8 @@ def get_random_recipes(num_recipes: int) -> dict:
     params = {
         'number': num_recipes,  # Number of recipes to return
         'apiKey': API_KEY,  # Your Spoonacular API key
-        'includeNutrition': False
+        'includeNutrition': False,
+        'exclude-tags': 'foodista.com'
     }
 
     # Make the GET request to Spoonacular API

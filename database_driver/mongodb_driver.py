@@ -13,22 +13,28 @@ try:
     client = mongodb_cloud_connector.get_cloud_connection_client()
     db = client[config_data["database-name"]]
 
+    pantry_essentials_collection_name = config_data["pantry-essentials-collection-name"]
+    recipe_list_collection_name = config_data["recipe-list-collection-name"]
+
+    if recipe_list_collection_name not in db.list_collection_names():
+        print(f"Collection {recipe_list_collection_name} does not exist, creating with unique index")
+        db[recipe_list_collection_name].create_index("source_url", unique=True)
+
     # Set up all collection objects
-    pantry_essentials_collection = db[config_data["pantry-essentials-collection-name"]]
-    recipe_collection = db[config_data["recipe-list-collection-name"]]
+    pantry_essentials_collection = db[pantry_essentials_collection_name]
+    recipe_collection = db[recipe_list_collection_name]
 except Exception as e:
     print(f"MongoDB Error: {str(e)}")
 
 
 def insert_recipe_list(recipe_list):
     try:
-        # Insert entire provided recipe list
-        result = recipe_collection.insert_many(recipe_list)
+        # Insert entire provided recipe list, not inserting any duplicate entries (ordered=False)
+        result = recipe_collection.insert_many(recipe_list, ordered=False)
         print(f"Inserted {len(recipe_list)} new recipes")
     except Exception as e:
         # Print the type of the exception and the exception message
         print(f"Exception type: {type(e)}")
-        print(f"Exception message: {str(e)}")
 
 
 def insert_pantry_essentials(ingredient_list: dict):
