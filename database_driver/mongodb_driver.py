@@ -19,6 +19,7 @@ try:
     if recipe_list_collection_name not in db.list_collection_names():
         print(f"Collection {recipe_list_collection_name} does not exist, creating with unique index")
         db[recipe_list_collection_name].create_index("source_url", unique=True)
+        db[recipe_list_collection_name].create_index("ingredients")
 
     # Set up all collection objects
     pantry_essentials_collection = db[pantry_essentials_collection_name]

@@ -32,6 +32,7 @@ def check_recipe_links(recipe_list):
         try:
             response = requests.head(recipe_dict["source_url"], allow_redirects=True, stream=True)
             if response.status_code == 200:
+                valid_recipe = sorted(recipe_dict["ingredients"])
                 filtered_recipes.append(recipe_dict)
         except requests.RequestException as e:
             continue
@@ -49,7 +50,7 @@ def transform_recipe_structure(recipe_list_obj: dict):
         {
             "recipe_name": recipe["title"],
             "source_url": recipe["sourceUrl"],
-            "ingredients": [ingredient["name"] for ingredient in recipe["extendedIngredients"]]
+            "ingredients": sorted([ingredient["name"] for ingredient in recipe["extendedIngredients"]])
         }
         for recipe in recipe_list_obj["recipes"]
     ]
@@ -70,7 +71,6 @@ def get_random_recipes(num_recipes: int) -> dict:
         'number': num_recipes,  # Number of recipes to return
         'apiKey': API_KEY,  # Your Spoonacular API key
         'includeNutrition': False,
-        'exclude-tags': 'foodista.com'
     }
 
     # Make the GET request to Spoonacular API
@@ -108,5 +108,5 @@ def search_recipes_by_ingredient(ingredients: str) -> dict:
 
 
 if __name__ == "__main__":
-    numRecipes = 100
+    numRecipes = 10
     scrape_and_insert_recipes(numRecipes)
