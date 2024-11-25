@@ -1,7 +1,6 @@
 import json
 import database_driver.mongodb_cloud_connector as mongodb_cloud_connector
 import os
-from pymongo import ASCENDING, DESCENDING
 
 # Load Config file
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'mongo_config.json')
@@ -13,7 +12,7 @@ try:
     client = mongodb_cloud_connector.get_cloud_connection_client()
     db = client[config_data["database-name"]]
 
-    pantry_essentials_collection_name = config_data["pantry-essentials-collection-name"]
+    config_collection_name = config_data["config-collection-name"]
     recipe_list_collection_name = config_data["recipe-list-collection-name"]
 
     if recipe_list_collection_name not in db.list_collection_names():
@@ -22,7 +21,7 @@ try:
         db[recipe_list_collection_name].create_index("ingredients")
 
     # Set up all collection objects
-    pantry_essentials_collection = db[pantry_essentials_collection_name]
+    config_collection = db[config_collection_name]
     recipe_collection = db[recipe_list_collection_name]
 except Exception as e:
     print(f"MongoDB Error: {str(e)}")
@@ -43,18 +42,7 @@ def insert_pantry_essentials(ingredient_list: dict):
     Inserts an ingredient list to be stored as pantry essentials
     :param ingredient_list: dict containing list of ingredients
     """
-    if type(ingredient_list) is not dict:
-        raise TypeError(f"Expected parameter to be of type 'dict' but got {type(ingredient_list).__name__}")
-
-    try:
-        # Delete existing item and add new item
-        pantry_essentials_collection.delete_many({})
-        result = pantry_essentials_collection.insert_one(ingredient_list)
-        print(f"Inserted item with ID: {result.inserted_id}")
-    except Exception as e:
-        # Print the type of the exception and the exception message
-        print(f"Exception type: {type(e)}")
-        print(f"Exception message: {str(e)}")
+    insert_config_item("pantryEssentials", ingredient_list)
 
 
 def get_pantry_essentials() -> dict:
@@ -63,7 +51,44 @@ def get_pantry_essentials() -> dict:
     :return: dict holding list of ingredients
     """
     try:
-        return pantry_essentials_collection.find_one()
+        return config_collection.find_one({"config_item": "pantryEssentials"})
+    except Exception as e:
+        # Print the type of the exception and the exception message
+        print(f"Exception type: {type(e)}")
+        print(f"Exception message: {str(e)}")
+
+
+def get_normalized_ingredients():
+    """
+        Retrieves normalized ingredients from database
+        :return: dict holding list of ingredients
+        """
+    try:
+        return config_collection.find_one({"config_item": "normalized_ingredients"})
+    except Exception as e:
+        # Print the type of the exception and the exception message
+        print(f"Exception type: {type(e)}")
+        print(f"Exception message: {str(e)}")
+
+
+def insert_normalized_ingredient_names(normalized_ingredient_list: dict):
+    insert_config_item("normalized_ingredients", normalized_ingredient_list)
+    logger.warning("Testing warning message")
+
+
+def insert_config_item(item_name: str, dict_to_insert: dict):
+    if type(dict_to_insert) is not dict:
+        raise TypeError(f"Expected parameter to be of type 'dict' but got {type(dict_to_insert).__name__}")
+
+    try:
+        # Delete existing item and add new item
+        config_collection.delete_one({"config_item": item_name})
+        new_config_item = {
+            "config_item": item_name,
+            "ingredients": ingredients_list["ingredients"]
+        }
+        result = config_collection.insert_one(new_config_item)
+        print(f"Inserted item with ID: {result.inserted_id}")
     except Exception as e:
         # Print the type of the exception and the exception message
         print(f"Exception type: {type(e)}")
@@ -72,8 +97,7 @@ def get_pantry_essentials() -> dict:
 
 if __name__ == "__main__":
     ingredients_list = {
-        "ingredients": ["eggs", "milk", "flour", "salt", "pepper"]
+        "ingredients": ["eggs", "milk", "flour", "salt", "pepper", "apples", "vanilla"]
     }
 
-    insert_pantry_essentials(ingredients_list)
-    pantry_essentials = get_pantry_essentials()
+    insert_normalized_ingredient_names(ingredients_list)
