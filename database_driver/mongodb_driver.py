@@ -73,7 +73,6 @@ def get_normalized_ingredients():
 
 def insert_normalized_ingredient_names(normalized_ingredient_list: dict):
     insert_config_item("normalized_ingredients", normalized_ingredient_list)
-    logger.warning("Testing warning message")
 
 
 def insert_config_item(item_name: str, dict_to_insert: dict):
