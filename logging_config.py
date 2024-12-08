@@ -1,51 +1,16 @@
 import logging
-import logging.config
 
-def setup_logging():
-    logging_config = {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "formatters": {
-            "default": {
-                "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-            },
-        },
-        "handlers": {
-            "console": {
-                "class": "logging.StreamHandler",
-                "level": "DEBUG",
-                "formatter": "default",
-                "stream": "ext://sys.stdout",
-            },
-            "file": {
-                "class": "logging.FileHandler",
-                "level": "INFO",
-                "formatter": "default",
-                "filename": "app.log",
-            },
-        },
-        "loggers": {
-            "database_driver": {
-                "level": "INFO",
-                "handlers": ["console", "file"],
-                "propagate": False,
-            },
-            "recipe_manager": {
-                "level": "INFO",
-                "handlers": ["console", "file"],
-                "propagate": False,
-            },
-            "recipe_scraper": {
-                "level": "INFO",
-                "handlers": ["console", "file"],
-                "propagate": False,
-            },
-            "request_handler": {
-                "level": "INFO",
-                "handlers": ["console", "file"],
-                "propagate": False,
-            },
-        },
-    }
+# Configure the root logger
+def setup_logger():
 
-    logging.config.dictConfig(logging_config)
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler("shared_log.log")
+        ]
+    )
+
+# Call setup_logger when this module is imported
+setup_logger()

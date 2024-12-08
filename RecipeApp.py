@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 import database_driver
+import logging_config, logging
 
 app = Flask(__name__)
-
+logger = logging.getLogger(__name__)
 
 # Route to handle GET requests for "get_recipes"
 @app.route('/get_recipes', methods=['GET'])
@@ -27,4 +28,5 @@ def get_recipe_links():
 
 
 if __name__ == '__main__':
+    logger.warning("This is a specific warning message")
     app.run(debug=True)

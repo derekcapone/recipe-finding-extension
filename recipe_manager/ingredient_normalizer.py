@@ -1,8 +1,10 @@
 import spacy
 from rapidfuzz import fuzz
+import logging_config, logging
 
 # Load the pre-trained spacy model
 nlp = spacy.load("en_core_web_md")
+logger = logging.getLogger(__name__)
 
 
 def find_ingredient_from_list(ingredient_list, ingredient_to_check) -> (bool, str):
@@ -13,7 +15,7 @@ def find_ingredient_from_list(ingredient_list, ingredient_to_check) -> (bool, st
     # First get possible matches from NLP model
     for ingredient in ingredient_list:
         isSimilar, similarity = nlp_similarity_check(ingredient, ingredient_to_check)
-        print(f"NLP: {ingredient} vs {ingredient_to_check}: Similarity={similarity:.2f}, isSimilar={isSimilar}")
+        logger.warning(f"NLP: {ingredient} vs {ingredient_to_check}: Similarity={similarity:.2f}, isSimilar={isSimilar}")
         if isSimilar:
             possible_matches.append(ingredient)
 

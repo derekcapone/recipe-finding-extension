@@ -2,6 +2,7 @@ import json
 import database_driver.mongodb_cloud_connector as mongodb_cloud_connector
 import os
 
+
 # Load Config file
 config_path = os.path.join(os.path.dirname(__file__), 'config', 'mongo_config.json')
 with open(config_path, 'r') as file:
