@@ -1,3 +1,4 @@
 .idea/
 database_driver/__pycache__/
 __pycache__/
+application_log.log

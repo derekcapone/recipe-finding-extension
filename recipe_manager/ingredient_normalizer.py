@@ -9,35 +9,22 @@ logger = logging.getLogger(__name__)
 
 def find_ingredient_from_list(ingredient_list, ingredient_to_check) -> (bool, str):
     """
-    Uses fuzz matching and NLP to determine if the ingredient exists in the ingredient list
+    Uses NLP to determine if the ingredient exists in the ingredient list
+    TODO: Make this more robust so that we ensure we are correlating the correct ingredient names
     """
-    possible_matches = []
-    # First get possible matches from NLP model
+    highest_similarity = 0.0
+    matching_ingredient = ""
     for ingredient in ingredient_list:
         isSimilar, similarity = nlp_similarity_check(ingredient, ingredient_to_check)
-        logger.warning(f"NLP: {ingredient} vs {ingredient_to_check}: Similarity={similarity:.2f}, isSimilar={isSimilar}")
-        if isSimilar:
-            possible_matches.append(ingredient)
-
-    # If no matches were found then return False because no ingredients matched the threshold
-    if len(possible_matches) == 0:
-        return False, ""
-    # If one match found, return that match
-    elif len(possible_matches) == 1:
-        return True, possible_matches[0]
-
-    # Then go back through the list and get the highest fuzz match
-    match_value = 0
-    final_ingredient = ""
-    for possible_match in possible_matches:
-        new_match_value = fuzz.ratio(possible_match, ingredient_to_check)
-        if new_match_value > match_value:
-            final_ingredient = possible_match
-            match_value = new_match_value
+        logger.debug(f"NLP: {ingredient} vs {ingredient_to_check}: Similarity={similarity:.2f}, isSimilar={isSimilar}")
+        if isSimilar and similarity > highest_similarity:
+            matching_ingredient = ingredient
+            highest_similarity = similarity
+    # Return (True, ingredient name) with the highest similarity score, or (False, "") if similarity threshold not reached
+    return (True, matching_ingredient) if highest_similarity != 0 else (False, matching_ingredient)
 
 
-
-def nlp_similarity_check(ingredient1, ingredient2, threshold=0.8):
+def nlp_similarity_check(ingredient1, ingredient2, threshold=0.85):
     """
     Compare two ingredient names for similarity.
 
@@ -54,7 +41,8 @@ def nlp_similarity_check(ingredient1, ingredient2, threshold=0.8):
 
 
 if __name__ == "__main__":
-    ingredient_list = ["juice of lemon", "lime juice"]
+    ingredient_list = ["jasdfa", "asdfht"]
     ingredient = "lemon juice"
 
     matchFound, ingredient_name = find_ingredient_from_list(ingredient_list, ingredient)
+    logger.warning(f"Ingredient match: {matchFound} for {ingredient}")
