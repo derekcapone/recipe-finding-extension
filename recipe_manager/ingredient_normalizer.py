@@ -1,5 +1,4 @@
 import spacy
-from rapidfuzz import fuzz
 import logging_config, logging
 
 # Load the pre-trained spacy model

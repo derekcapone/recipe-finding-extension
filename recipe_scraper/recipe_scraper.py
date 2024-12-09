@@ -2,6 +2,11 @@ import requests
 import json
 import os
 import database_driver
+import logging_config, logging
+import recipe_manager
+
+# Get logger instance
+logger = logging.getLogger(__name__)
 
 # Your API key
 API_KEY = os.getenv("SPOONACULAR_APP_ID")
@@ -9,30 +14,37 @@ API_KEY = os.getenv("SPOONACULAR_APP_ID")
 # Base URL for the Spoonacular API
 BASE_URL = 'https://api.spoonacular.com'
 
+# Retrieve the normalized ingredient list from MongoDB
+
 
 def scrape_and_insert_recipes(num_recipes: int):
-    # Get random recipes
+    # Get random recipes and transform to remove unused data
     random_recipe_list = get_random_recipes(num_recipes)
-
     transformed_random_recipes = transform_recipe_structure(random_recipe_list)
 
     # Ensure each recipe link still works before inserting
-    valid_recipe_list = check_recipe_links(transformed_random_recipes)
+    valid_recipe_list = check_and_normalize_recipes(transformed_random_recipes)
+
     database_driver.insert_recipe_list(valid_recipe_list)
 
 
-def check_recipe_links(recipe_list):
+def check_and_normalize_recipes(recipe_list):
     """
     Filters list based on whether the source URL is still active
+    If link is active, ingredients are normalized based on valid ingredient names
     :param recipe_list:
     :return:
     """
     filtered_recipes = []
+
     for recipe_dict in recipe_list:
         try:
             response = requests.head(recipe_dict["source_url"], allow_redirects=True, stream=True)
             if response.status_code == 200:
-                valid_recipe = sorted(recipe_dict["ingredients"])
+                # Normalize ingredients, insert new ingredients into DB
+
+
+                # Append to new recipe list to be inserted
                 filtered_recipes.append(recipe_dict)
         except requests.RequestException as e:
             continue

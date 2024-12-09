@@ -1,5 +1,0 @@
-{
-  "database-name": "RecipeDatabase",
-  "config-collection-name": "config",
-  "recipe-list-collection-name": "recipeList"
-}
