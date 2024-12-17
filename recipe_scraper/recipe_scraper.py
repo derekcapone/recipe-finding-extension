@@ -14,8 +14,6 @@ API_KEY = os.getenv("SPOONACULAR_APP_ID")
 # Base URL for the Spoonacular API
 BASE_URL = 'https://api.spoonacular.com'
 
-# Retrieve the normalized ingredient list from MongoDB
-
 
 def scrape_and_insert_recipes(num_recipes: int):
     # Get random recipes and transform to remove unused data
@@ -32,24 +30,40 @@ def check_and_normalize_recipes(recipe_list):
     """
     Filters list based on whether the source URL is still active
     If link is active, ingredients are normalized based on valid ingredient names
-    :param recipe_list:
-    :return:
+    :param recipe_list: List of recipes to check for validity and transform
+    :return: List of recipes that are valid and normalized
     """
     filtered_recipes = []
-
     for recipe_dict in recipe_list:
         try:
             response = requests.head(recipe_dict["source_url"], allow_redirects=True, stream=True)
             if response.status_code == 200:
-                # Normalize ingredients, insert new ingredients into DB
-
-
-                # Append to new recipe list to be inserted
-                filtered_recipes.append(recipe_dict)
+                # Normalize ingredients then append
+                normalized_recipe = normalize_ingredients_from_dict(recipe_dict)
+                filtered_recipes.append(normalized_recipe)
         except requests.RequestException as e:
             continue
     return filtered_recipes
 
+
+def normalize_ingredients_from_dict(recipe_dict):
+    """
+    Iterates through the ingredients in the recipe and normalizes each of the ingredients
+    :param recipe_dict: recipe dict to normalize
+    :return: recipe dict with ingredients normalized
+    """
+    new_ingredients = []
+    for ingredient in recipe_dict["ingredients"]:
+        # Normalize and append ingredient names
+        ingredient_name = recipe_manager.match_normalized_ingredients(ingredient)
+        new_ingredients.append(ingredient_name)
+
+    normalized_dict = {
+        "recipe_name": recipe_dict["recipe_name"],
+        "source_url": recipe_dict["source_url"],
+        "ingredients": sorted(new_ingredients)
+    }
+    return normalized_dict
 
 
 def transform_recipe_structure(recipe_list_obj: dict):
@@ -83,6 +97,7 @@ def get_random_recipes(num_recipes: int) -> dict:
         'number': num_recipes,  # Number of recipes to return
         'apiKey': API_KEY,  # Your Spoonacular API key
         'includeNutrition': False,
+        'exclude-tags': "foodista.com"
     }
 
     # Make the GET request to Spoonacular API
@@ -120,5 +135,24 @@ def search_recipes_by_ingredient(ingredients: str) -> dict:
 
 
 if __name__ == "__main__":
-    numRecipes = 10
-    scrape_and_insert_recipes(numRecipes)
+    scrape_and_insert_recipes(10)
+
+#     recipe_dict = {
+#   "recipe_name": "Raw Vegan Chocolate and Raspberry Cake",
+#   "source_url": "https://www.foodista.com/recipe/CDSD8KXF/raw-vegan-chocolate-and-raspberry-cake",
+#   "ingredients": [
+#     "bananas",
+#     "chocolate cream",
+#     "chocolate flakes)",
+#     "cocoa / carob powder",
+#     "cocoa/carob",
+#     "crust",
+#     "dates",
+#     "honey",
+#     "raspberries",
+#     "sea salt",
+#     "walnuts"
+#   ]
+# }
+#
+#     new_dict = normalize_ingredients_from_dict(recipe_dict)

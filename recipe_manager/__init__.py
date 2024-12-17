@@ -1,3 +1,3 @@
-from .ingredient_normalizer import find_ingredient_from_list
+from .ingredient_normalizer import match_normalized_ingredients
 
-__all__ = ["find_ingredient_from_list"]
+__all__ = ["match_normalized_ingredients"]

@@ -1,6 +1,4 @@
 import json
-from calendar import error
-
 import database_driver.mongodb_cloud_connector as mongodb_cloud_connector
 import os
 import logging_config, logging
@@ -71,30 +69,27 @@ def get_pantry_essentials() -> dict:
 
 def get_normalized_ingredients():
     """
-        Retrieves normalized ingredients from database
-        :return: dict holding list of ingredients
-        """
+    Retrieves normalized ingredients from database
+    :return: list of dicts of ingredients and aliases
+    """
     try:
-        return normalized_ingredients_collection.find()
+        return list(normalized_ingredients_collection.find())
     except Exception as e:
         # Print the type of the exception and the exception message
         logger.error(f"Exception type: {type(e)}")
         logger.error(f"Exception message: {str(e)}")
 
 
-def insert_normalized_ingredient(new_normalized_ingredient: dict):
-    # Verify structure matches normalized ingredient schema
-    expected_structure = {
-        "normalized_name": str,
-        "alias": list
+def insert_normalized_ingredient(new_normalized_ingredient_name):
+    """
+    Inserts a new normalized ingredient with the name provided as parameter
+    :param new_normalized_ingredient_name: New ingredient name to be inserted
+    """
+    new_normalized_ingredient = {
+        "normalized_name": new_normalized_ingredient_name,
+        "alias": []
     }
-    for key, expected_type in expected_structure.items():
-        if key not in new_normalized_ingredient:
-            raise KeyError(f"Missing key for normalized ingredient: {key}")
-        elif isinstance(type(new_normalized_ingredient[key]), expected_type):
-            raise TypeError(f"Expected type {expected_type} for {key} but got {type(new_normalized_ingredient[key]).__name__}")
 
-    # Insert if structure matches
     normalized_ingredients_collection.insert_one(new_normalized_ingredient)
 
 
@@ -114,6 +109,7 @@ def insert_config_item(item_name: str, dict_to_insert: dict):
 
 
 if __name__ == "__main__":
-    normalized_ingredients = normalized_ingredients_collection.find()
-    for ing in normalized_ingredients:
-        print(ing)
+    new_ingredients = []
+
+    for ingredient in new_ingredients:
+        insert_normalized_ingredient(ingredient)
