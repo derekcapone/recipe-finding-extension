@@ -2,6 +2,8 @@ import json
 import database_driver.mongodb_cloud_connector as mongodb_cloud_connector
 import os
 import logging_config, logging
+import pymongo
+from pymongo.errors import BulkWriteError
 
 # Get logger instance
 logger = logging.getLogger(__name__)
@@ -41,9 +43,12 @@ def insert_recipe_list(recipe_list):
         # Insert entire provided recipe list, not inserting any duplicate entries (ordered=False)
         result = recipe_collection.insert_many(recipe_list, ordered=False)
         logger.info(f"Inserted {len(recipe_list)} new recipes")
+    except BulkWriteError as bwe:
+        logger.info(f"{type(bwe)} occurred, likely due to duplicate source URLs. Rest of recipes still written")
     except Exception as e:
         # Print the type of the exception and the exception message
         logger.error(f"Exception type: {type(e)}")
+        logger.error(f"Exception message: {e}")
 
 
 def insert_pantry_essentials(ingredient_list: dict):
@@ -109,7 +114,8 @@ def insert_config_item(item_name: str, dict_to_insert: dict):
 
 
 if __name__ == "__main__":
-    new_ingredients = []
+    new_ingredients = ["almond extract", "blueberry jam", "raspberry jam", "strawberry jam", "fig jam"]
+
 
     for ingredient in new_ingredients:
         insert_normalized_ingredient(ingredient)

@@ -135,24 +135,4 @@ def search_recipes_by_ingredient(ingredients: str) -> dict:
 
 
 if __name__ == "__main__":
-    scrape_and_insert_recipes(10)
-
-#     recipe_dict = {
-#   "recipe_name": "Raw Vegan Chocolate and Raspberry Cake",
-#   "source_url": "https://www.foodista.com/recipe/CDSD8KXF/raw-vegan-chocolate-and-raspberry-cake",
-#   "ingredients": [
-#     "bananas",
-#     "chocolate cream",
-#     "chocolate flakes)",
-#     "cocoa / carob powder",
-#     "cocoa/carob",
-#     "crust",
-#     "dates",
-#     "honey",
-#     "raspberries",
-#     "sea salt",
-#     "walnuts"
-#   ]
-# }
-#
-#     new_dict = normalize_ingredients_from_dict(recipe_dict)
+    scrape_and_insert_recipes(50)
