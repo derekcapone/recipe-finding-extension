@@ -5,6 +5,9 @@ import logging_config, logging
 import pymongo
 from pymongo.errors import BulkWriteError
 
+# Number of recipes to return from the recipe retrieval
+NUMBER_RECIPES_TO_RETURN = 1
+
 # Get logger instance
 logger = logging.getLogger(__name__)
 
@@ -111,6 +114,34 @@ def insert_config_item(item_name: str, dict_to_insert: dict):
         # Print the type of the exception and the exception message
         logger.error(f"Exception type: {type(e)}")
         logger.error(f"Exception message: {str(e)}")
+
+
+def get_ingredient_set_difference(ingredient_list: list[str]):
+    # Define pipeline for aggregation
+    pipeline = [
+        {
+            "$addFields": {
+                "difference_ingredients": {
+                    "$setDifference": ["$ingredients", ingredient_list]
+                }
+            }
+        },
+        # Compute size of difference
+        {
+            "$addFields": {
+                "difference_count": {"$size": "$difference_ingredients"}
+            }
+        },
+        # Sort by ascending so that smallest difference is at the top
+        {
+            "$sort": {"difference_count": 1}
+        },
+        # Get top item (smallest difference)
+        {
+            "$limit": NUMBER_RECIPES_TO_RETURN
+        }
+    ]
+    return list(recipe_collection.aggregate(pipeline))
 
 
 if __name__ == "__main__":

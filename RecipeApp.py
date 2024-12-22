@@ -28,5 +28,4 @@ def get_recipe_links():
 
 
 if __name__ == '__main__':
-    logger.warning("This is a specific warning message")
     app.run(debug=True)

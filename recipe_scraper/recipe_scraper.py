@@ -55,7 +55,7 @@ def normalize_ingredients_from_dict(recipe_dict):
     new_ingredients = []
     for ingredient in recipe_dict["ingredients"]:
         # Normalize and append ingredient names
-        ingredient_name = recipe_manager.match_normalized_ingredients(ingredient)
+        ingredient_name = recipe_manager.match_normalized_single_ingredient(ingredient)
         new_ingredients.append(ingredient_name)
 
     normalized_dict = {
@@ -135,4 +135,4 @@ def search_recipes_by_ingredient(ingredients: str) -> dict:
 
 
 if __name__ == "__main__":
-    scrape_and_insert_recipes(50)
+    scrape_and_insert_recipes(10)
