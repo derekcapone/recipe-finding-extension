@@ -57,25 +57,3 @@ if __name__ == "__main__":
 
     returned_object = find_similar_recipe(ingredient_request)
     print(returned_object)
-
-
-
-    # Large list of integers
-    # list1_int = list(range(100000))
-    # list2_int = list(range(50000, 150000))
-    #
-    # # Large list of strings
-    # list1_str = [str(i) for i in list1_int]
-    # list2_str = [str(i) for i in list2_int]
-    #
-    # # Measure time for integers
-    # start = time.time()
-    # diff_int = set(list1_int) ^ set(list2_int)
-    # end = time.time()
-    # print(f"Time for integers: {end - start:.5f} seconds")
-    #
-    # # Measure time for strings
-    # start = time.time()
-    # diff_str = set(list1_str) ^ set(list2_str)
-    # end = time.time()
-    # print(f"Time for strings: {end - start:.5f} seconds")
