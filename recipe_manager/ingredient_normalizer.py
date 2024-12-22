@@ -30,17 +30,17 @@ def match_normalized_single_ingredient(ingredient_to_check):
     # Try a fuzzy string match, return ingredient if only one match is hit
     sublist = process.extractOne(ingredient_to_check, normalized_ingredients_strings, score_cutoff=70, scorer=fuzz.ratio)
     if sublist is None:
-        logger.info(f"{ingredient_to_check} was not found in database")
+        logger.debug(f"{ingredient_to_check} was not found in database")
         # Add to database and return ingredient as written
         # TODO: Implement Recipe Scraping better so that we can actually continually scrape and insert
         # normalized_ingredients_strings.append(ingredient_to_check)
         # database_driver.insert_normalized_ingredient(ingredient_to_check)
         return ingredient_to_check
     elif sublist[0] != ingredient_to_check:
-        logger.info(f"Non-exact match between {ingredient_to_check}-{sublist[0]} with score ")
+        logger.debug(f"Non-exact match between {ingredient_to_check}-{sublist[0]} with score ")
         return sublist[0]
     else:
-        logger.info(f"Exact match for {ingredient_to_check}")
+        logger.debug(f"Exact match for {ingredient_to_check}")
         return ingredient_to_check
 
 

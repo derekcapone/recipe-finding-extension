@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
-import database_driver
 import logging_config, logging
+import database_driver
+import recipe_manager
+import json
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
@@ -24,7 +26,10 @@ def set_pantry_essentials():
 # Route to handle GET requests for "get_recipe_links"
 @app.route('/get_recipe_links', methods=['GET'])
 def get_recipe_links():
-    return "Getting recipe links..."
+    request_object = request.get_json()
+    matching_recipe = recipe_manager.find_similar_recipe(request_object)
+
+    return json.dumps(matching_recipe)
 
 
 if __name__ == '__main__':

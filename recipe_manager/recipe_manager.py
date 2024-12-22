@@ -1,4 +1,4 @@
-import ingredient_normalizer
+import recipe_manager.ingredient_normalizer as ingredient_normalizer
 import database_driver
 
 def find_similar_recipe(ingredient_request: dict):
@@ -21,7 +21,7 @@ def find_similar_recipe(ingredient_request: dict):
     smallest_difference = database_driver.get_ingredient_set_difference(normalized_ingredient_list)
     resulting_dict = smallest_difference[0]
 
-    if ingredient_request["num_missing_ingredients_allowed"] > resulting_dict["difference_count"]:
+    if ingredient_request["num_missing_ingredients_allowed"] < resulting_dict["difference_count"]:
         # Not allowed this many differences, return None
         return {"success": False}
 
