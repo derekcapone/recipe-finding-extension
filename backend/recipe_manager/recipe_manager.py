@@ -1,4 +1,4 @@
-import recipe_manager.ingredient_normalizer as ingredient_normalizer
+import recipe_manager.ingredient_normalizer_legacy as ingredient_normalizer
 import database_driver
 
 def find_similar_recipe(ingredient_request: dict):
