@@ -1,6 +1,7 @@
 from ingredient_parser import parse_ingredient
 from typing import Tuple, List
 from recipe_manager.ingredient_readers import IngredientReaderInterface
+from recipe_manager.sentence_transformer_handler import SentenceTransformerHandler
 from tests.ingredient_testing.ingredient_writer import RawIngredientReader
 import logging_config, logging
 
@@ -26,6 +27,9 @@ class IngredientNormalizer:
         # Generate dict of all ingredients and their aliases
         self.all_ingredients = self.ingredient_reader.get_all_ingredients()
 
+        # Instantiate SentenceTransformerHandler object
+        self.sentence_transformer = SentenceTransformerHandler()
+
     def generate_normalize_ingredient_string_list(self, ingredient_string_list: List[str]) -> List[str]:
         """
         Takes ingredient_string_list and generates a final normalized ingredients list.
@@ -38,10 +42,16 @@ class IngredientNormalizer:
 
         normalized_list = []
         for ingredient_tuple in ingredient_string_tuples:
+            if ingredient_tuple[0] in IGNORED_INGREDIENTS or ingredient_tuple[1] in IGNORED_INGREDIENTS:
+                # Ignore anything in IGNORED_INGREDIENTS list
+                logger.info(f"Ignored ingredient found: {ingredient_tuple}, skipping.")
+                continue
+
+            # Attempt to generate normalized name for next tuple
             new_normalized_name = self.generate_normalized_ingredient_string(ingredient_tuple)
 
             if not new_normalized_name:
-                # Log warning that we couldn't find match and continue
+                # Ingredient match not confidently found. Log warning and continue
                 logger.warning(f"Couldn't find ingredient match for tuple: {ingredient_tuple}")
                 continue
 
@@ -128,6 +138,9 @@ class IngredientNormalizer:
         Returns True if match exists, False if no match
         """
         return string_to_check in self.unrolled_ingredient_strings
+
+
+
 
 
 if __name__ == "__main__":
