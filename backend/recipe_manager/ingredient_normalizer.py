@@ -1,15 +1,23 @@
-from ingredient_parser import parse_ingredient, parse_multiple_ingredients
+from ingredient_parser import parse_ingredient
 from typing import Tuple
+from recipe_manager.ingredient_readers import IngredientReaderInterface
+from tests.ingredient_testing.ingredient_writer import RawIngredientReader
 
 IGNORED_INGREDIENTS = [
     "water",
 ]
 
 class IngredientNormalizer:
+    def __init__(self, ingredient_reader: IngredientReaderInterface):
+        self.ingredient_reader = ingredient_reader
+        self.unrolled_ingredient_strings = self.ingredient_reader.get_and_unroll_ingredients()
+        self.all_ingredients = self.ingredient_reader.get_all_ingredients()
+
     @staticmethod
     def trim_ingredient_string(ingredient_string: str) -> Tuple[str, str]:
         # Use foundation foods for extra trimming
-        parsed_ingredient = parse_ingredient(ingredient_string, foundation_foods=True)
+        lower_ingredient_string = ingredient_string.lower()
+        parsed_ingredient = parse_ingredient(lower_ingredient_string, foundation_foods=True)
 
         foundation_text = None
         ingredient_text = None
@@ -46,7 +54,12 @@ if __name__ == "__main__":
         "2 pounds 85% lean ground beef",
         "1 (12-ounce) package frozen mixed vegetables",
         "1 1/2 cups lower-sodium beef broth",
+        "6 green olives"
     ]
 
+    raw_ingredient_reader = RawIngredientReader()
+    ingredient_normalizer = IngredientNormalizer(raw_ingredient_reader)
+
     for ingredient in ingredient_strings:
-        IngredientNormalizer.trim_ingredient_string(ingredient)
+        new_ingredient = IngredientNormalizer.trim_ingredient_string(ingredient)
+        print(new_ingredient)

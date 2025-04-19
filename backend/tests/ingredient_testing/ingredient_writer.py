@@ -1,9 +1,39 @@
 import json
 from collections import defaultdict
 import os
+from recipe_manager.ingredient_readers import IngredientReaderInterface
 
 # Path to your JSON file
-json_file = "baseline_ingredient_list.json"
+project_root = os.getenv("RECIPE_APP_BACKEND_ROOT")
+json_file = os.path.join(project_root, "tests/ingredient_testing/baseline_ingredient_list.json")
+
+
+class RawIngredientReader(IngredientReaderInterface):
+    def __init__(self):
+        self.json_file = json_file
+
+    def get_and_unroll_ingredients(self):
+        with open(self.json_file, 'r') as f:
+            data = json.load(f)
+
+        # Initialize the final list of ingredients
+        ingredient_list = []
+
+        # Loop through each ingredient in the JSON
+        for item in data:
+            # Add the ingredient name itself
+            ingredient_list.append(item["name"])
+
+            # Add all aliases associated with the ingredient
+            ingredient_list.extend(item.get("alias", []))
+
+        return ingredient_list
+
+    def get_all_ingredients(self):
+        with open(self.json_file, 'r') as f:
+            data = json.load(f)
+
+        return data
 
 
 def append_ingredient(ingredient_to_add):
@@ -22,13 +52,13 @@ def append_ingredient(ingredient_to_add):
             return
 
     # Append the new ingredient to the list
-    data.append(new_ingredient)
+    data.append(ingredient_to_add)
 
     # Write the updated list back to the file
     with open(json_file, 'w') as f:
         json.dump(data, f, indent=2)
 
-    print(f"Added: {new_ingredient}")
+    print(f"Added: {ingredient_to_add}")
 
 
 def append_aliases(ingredient_name, new_aliases):
@@ -100,27 +130,15 @@ def find_duplicate_ingredients():
 
     return duplicates
 
-def get_and_unroll_ingredients():
-    with open(json_file, 'r') as f:
-        data = json.load(f)
-
-    # Initialize the final list of ingredients
-    ingredient_list = []
-
-    # Loop through each ingredient in the JSON
-    for item in data:
-        # Add the ingredient name itself
-        ingredient_list.append(item["name"])
-
-        # Add all aliases associated with the ingredient
-        ingredient_list.extend(item.get("alias", []))
-
-    return ingredient_list
 
 if __name__ == "__main__":
-    ingredients = get_and_unroll_ingredients()
-    for ing in ingredients:
-        print(ing)
+    raw_ingredient_reader = RawIngredientReader()
+
+    unrolled_ingredients = raw_ingredient_reader.get_and_unroll_ingredients()
+    print(unrolled_ingredients)
+
+    non_unrolled = raw_ingredient_reader.get_all_ingredients()
+    print(non_unrolled)
 
     # ### Create Ingredient ###
     # new_ingredient = {
