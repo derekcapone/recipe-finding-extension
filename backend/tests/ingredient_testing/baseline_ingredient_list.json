@@ -1,1 +1,1969 @@
-s
+[
+  {
+    "name": "butter",
+    "alias": [
+      "salted butter",
+      "unsalted butter",
+      "sweet cream butter",
+      "cultured butter"
+    ]
+  },
+  {
+    "name": "olive oil",
+    "alias": [
+      "extra virgin olive oil",
+      "virgin olive oil",
+      "light olive oil",
+      "refined olive oil"
+    ]
+  },
+  {
+    "name": "olives",
+    "alias": [
+      "black olives",
+      "green olives",
+      "pitted olives",
+      "stuffed olives",
+      "kalamata olives",
+      "ripe olives",
+      "canned olives"
+    ]
+  },
+  {
+    "name": "vegetable oil",
+    "alias": [
+      "canola oil",
+      "corn oil",
+      "soybean oil",
+      "sunflower oil",
+      "vegetable cooking oil",
+      "cooking oil",
+      "cooking spray",
+      "oil",
+      "neutral oil",
+      "neutral cooking oil",
+      "avocado oil"
+    ]
+  },
+  {
+    "name": "caesar dressing",
+    "alias": [
+      "creamy caesar dressing",
+      "homemade caesar dressing",
+      "store-bought caesar dressing",
+      "classic caesar dressing",
+      "caesar salad dressing"
+    ]
+  },
+  {
+    "name": "sugar",
+    "alias": [
+      "granulated sugar",
+      "white sugar",
+      "caster sugar",
+      "superfine sugar"
+    ]
+  },
+  {
+    "name": "brown sugar",
+    "alias": [
+      "light brown sugar",
+      "dark brown sugar",
+      "demerara sugar",
+      "turbinado sugar"
+    ]
+  },
+  {
+    "name": "flour",
+    "alias": [
+      "all-purpose flour",
+      "plain flour",
+      "AP flour",
+      "white flour"
+    ]
+  },
+  {
+    "name": "baking soda",
+    "alias": [
+      "sodium bicarbonate",
+      "bicarbonate of soda"
+    ]
+  },
+  {
+    "name": "baking powder",
+    "alias": [
+      "double-acting baking powder",
+      "single-acting baking powder"
+    ]
+  },
+  {
+    "name": "milk",
+    "alias": [
+      "whole milk",
+      "2% milk",
+      "skim milk",
+      "nonfat milk"
+    ]
+  },
+  {
+    "name": "cream",
+    "alias": [
+      "heavy cream",
+      "whipping cream",
+      "double cream",
+      "single cream"
+    ]
+  },
+  {
+    "name": "eggs",
+    "alias": [
+      "large eggs",
+      "medium eggs",
+      "extra-large eggs",
+      "jumbo eggs"
+    ]
+  },
+  {
+    "name": "sauerkraut",
+    "alias": [
+      "fermented cabbage",
+      "pickled cabbage",
+      "sour cabbage",
+      "German sauerkraut",
+      "canned sauerkraut"
+    ]
+  },
+  {
+    "name": "hot sauce",
+    "alias": [
+      "chili sauce",
+      "pepper sauce",
+      "spicy sauce",
+      "tabasco",
+      "sriracha",
+      "frank's redhot",
+      "louisiana hot sauce"
+    ]
+  },
+  {
+    "name": "salt",
+    "alias": [
+      "table salt",
+      "sea salt",
+      "kosher salt",
+      "iodized salt"
+    ]
+  },
+  {
+    "name": "pepper",
+    "alias": [
+      "black pepper",
+      "white pepper",
+      "ground pepper",
+      "peppercorns"
+    ]
+  },
+  {
+    "name": "onion",
+    "alias": [
+      "yellow onion",
+      "white onion",
+      "red onion",
+      "sweet onion"
+    ]
+  },
+  {
+    "name": "onion powder",
+    "alias": [
+      "dehydrated onion powder",
+      "onion granules",
+      "onion seasoning"
+    ]
+  },
+  {
+    "name": "garlic",
+    "alias": [
+      "fresh garlic",
+      "garlic cloves",
+      "minced garlic",
+      "garlic paste"
+    ]
+  },
+  {
+    "name": "tomato",
+    "alias": [
+      "fresh tomato",
+      "cherry tomato",
+      "grape tomato",
+      "roma tomato",
+      "heirloom tomato",
+      "beefsteak tomato"
+    ]
+  },
+  {
+    "name": "chicken",
+    "alias": [
+      "chicken breast",
+      "chicken thighs",
+      "whole chicken",
+      "chicken drumsticks",
+      "rotisserie chicken"
+    ]
+  },
+  {
+    "name": "beef",
+    "alias": [
+      "ground beef",
+      "beef chuck",
+      "beef sirloin",
+      "beef brisket"
+    ]
+  },
+  {
+    "name": "mixed vegetables",
+    "alias": [
+      "frozen mixed vegetables",
+      "canned mixed vegetables",
+      "stir-fry vegetable mix",
+      "vegetable medley"
+    ]
+  },
+  {
+    "name": "rice",
+    "alias": [
+      "white rice",
+      "brown rice",
+      "basmati rice",
+      "jasmine rice"
+    ]
+  },
+  {
+    "name": "pasta",
+    "alias": [
+      "spaghetti",
+      "fettuccine",
+      "linguine",
+      "penne",
+      "macaroni",
+      "rotini"
+    ]
+  },
+  {
+    "name": "panko",
+    "alias": [
+      "panko breadcrumbs",
+      "Japanese breadcrumbs",
+      "crispy panko",
+      "panko crumbs"
+    ]
+  },
+  {
+    "name": "poblano pepper",
+    "alias": [
+      "pasilla pepper",
+      "ancho pepper",
+      "mild poblano",
+      "fresh poblano",
+      "dried poblano"
+    ]
+  },
+  {
+    "name": "breadcrumbs",
+    "alias": [
+      "bread crumbs",
+      "plain breadcrumbs",
+      "seasoned breadcrumbs",
+      "fresh breadcrumbs",
+      "dried breadcrumbs"
+    ]
+  },
+  {
+    "name": "tomato paste",
+    "alias": [
+      "concentrated tomato paste",
+      "tomato puree",
+      "thick tomato paste"
+    ]
+  },
+  {
+    "name": "honey",
+    "alias": [
+      "raw honey",
+      "clover honey",
+      "wildflower honey",
+      "manuka honey"
+    ]
+  },
+  {
+    "name": "maple syrup",
+    "alias": [
+      "pure maple syrup",
+      "grade A maple syrup",
+      "grade B maple syrup"
+    ]
+  },
+  {
+    "name": "yogurt",
+    "alias": [
+      "plain yogurt",
+      "Greek yogurt",
+      "nonfat yogurt",
+      "whole milk yogurt"
+    ]
+  },
+  {
+    "name": "cheese",
+    "alias": [
+      "cheddar cheese",
+      "mozzarella",
+      "monterey jack cheese",
+      "colby jack cheese"
+    ]
+  },
+  {
+    "name": "hoagie bun",
+    "alias": [
+      "sub bun",
+      "hoagie roll",
+      "sub roll",
+      "sandwich hoagie bun",
+      "Italian hoagie bun",
+      "hero bun"
+    ]
+  },
+  {
+    "name": "pickle",
+    "alias": [
+      "dill pickle",
+      "sweet pickle",
+      "bread and butter pickles",
+      "gherkin pickles",
+      "pickled cucumbers",
+      "pickled vegetables"
+    ]
+  },
+  {
+    "name": "salami",
+    "alias": [
+      "cured salami",
+      "Italian salami",
+      "hard salami",
+      "dry salami",
+      "sliced salami"
+    ]
+  },
+  {
+    "name": "blue cheese",
+    "alias": [
+      "bleu cheese",
+      "crumbled blue cheese",
+      "blue vein cheese",
+      "blue cheese crumbles",
+      "aged blue cheese",
+      "gorgonzola"
+    ]
+  },
+  {
+    "name": "pepperoni",
+    "alias": [
+      "sliced pepperoni",
+      "spicy pepperoni",
+      "turkey pepperoni",
+      "beef pepperoni",
+      "pepperoni sausage",
+      "mini pepperoni"
+    ]
+  },
+  {
+    "name": "lemon",
+    "alias": [
+      "fresh lemon juice",
+      "bottled lemon juice",
+      "squeezed lemon juice",
+      "lemon juice"
+    ]
+  },
+  {
+    "name": "lime",
+    "alias": [
+      "fresh lime juice",
+      "bottled lime juice",
+      "squeezed lime juice",
+      "lime juice"
+    ]
+  },
+  {
+    "name": "apple",
+    "alias": [
+      "red apple",
+      "green apple",
+      "Granny Smith apple",
+      "Gala apple",
+      "Honeycrisp apple",
+      "sliced apple",
+      "fresh apple"
+    ]
+  },
+  {
+    "name": "vinegar",
+    "alias": [
+      "white vinegar",
+      "apple cider vinegar",
+      "balsamic vinegar",
+      "red wine vinegar",
+      "white wine vinegar",
+      "rice vinegar"
+    ]
+  },
+  {
+    "name": "balsamic glaze",
+    "alias": [
+      "balsamic reduction"
+    ]
+  },
+  {
+    "name": "red wine",
+    "alias": [
+      "dry red wine",
+      "sweet red wine",
+      "cabernet sauvignon",
+      "merlot",
+      "pinot noir",
+      "syrah",
+      "red wine vinegar"
+    ]
+  },
+  {
+    "name": "white wine",
+    "alias": [
+      "dry white wine",
+      "sweet white wine",
+      "chardonnay",
+      "sauvignon blanc",
+      "pinot grigio",
+      "riesling"
+    ]
+  },
+  {
+    "name": "soy sauce",
+    "alias": [
+      "light soy sauce",
+      "dark soy sauce",
+      "low sodium soy sauce"
+    ]
+  },
+  {
+    "name": "artichoke",
+    "alias": [
+      "globe artichoke",
+      "baby artichoke",
+      "artichoke hearts",
+      "marinated artichokes"
+    ]
+  },
+  {
+    "name": "sausage",
+    "alias": [
+      "pork sausage",
+      "chicken sausage",
+      "beef sausage",
+      "italian sausage",
+      "breakfast sausage",
+      "sausages",
+      "bratwurst",
+      "andouille sausage",
+      "sausage links"
+    ]
+  },
+  {
+    "name": "fish sauce",
+    "alias": [
+      "nam pla",
+      "oyster sauce",
+      "nuoc mam",
+      "southeast Asian fish sauce"
+    ]
+  },
+  {
+    "name": "coconut milk",
+    "alias": [
+      "full-fat coconut milk",
+      "light coconut milk",
+      "canned coconut milk"
+    ]
+  },
+  {
+    "name": "garlic powder",
+    "alias": [
+      "garlic granules",
+      "dehydrated garlic powder",
+      "garlic seasoning"
+    ]
+  },
+  {
+    "name": "coconut oil",
+    "alias": [
+      "virgin coconut oil",
+      "refined coconut oil",
+      "refined coconut oil",
+      "cold-pressed coconut oil"
+    ]
+  },
+  {
+    "name": "cornstarch",
+    "alias": [
+      "corn starch",
+      "maize starch"
+    ]
+  },
+  {
+    "name": "cornmeal",
+    "alias": [
+      "yellow cornmeal",
+      "white cornmeal",
+      "coarse cornmeal"
+    ]
+  },
+  {
+    "name": "mustard",
+    "alias": [
+      "yellow mustard",
+      "Dijon mustard",
+      "whole grain mustard",
+      "spicy brown mustard"
+    ]
+  },
+  {
+    "name": "ketchup",
+    "alias": [
+      "tomato ketchup",
+      "catsup"
+    ]
+  },
+  {
+    "name": "mayonnaise",
+    "alias": [
+      "mayo",
+      "real mayonnaise",
+      "light mayonnaise"
+    ]
+  },
+  {
+    "name": "spinach",
+    "alias": [
+      "baby spinach",
+      "fresh spinach",
+      "frozen spinach"
+    ]
+  },
+  {
+    "name": "carrot",
+    "alias": [
+      "baby carrot",
+      "chopped carrot",
+      "grated carrot"
+    ]
+  },
+  {
+    "name": "potato",
+    "alias": [
+      "russet potato",
+      "Yukon gold potato",
+      "red potato",
+      "new potato",
+      "mashed potato"
+    ]
+  },
+  {
+    "name": "peach",
+    "alias": [
+      "fresh peach",
+      "canned peach",
+      "sliced peach",
+      "yellow peach",
+      "white peach",
+      "peach slices"
+    ]
+  },
+  {
+    "name": "mushroom",
+    "alias": [
+      "button mushroom",
+      "cremini mushroom",
+      "portobello mushroom",
+      "shiitake mushroom"
+    ]
+  },
+  {
+    "name": "cucumber",
+    "alias": [
+      "English cucumber",
+      "slicing cucumber",
+      "garden cucumber"
+    ]
+  },
+  {
+    "name": "bell pepper",
+    "alias": [
+      "green bell pepper",
+      "red bell pepper",
+      "yellow bell pepper",
+      "capsicum"
+    ]
+  },
+  {
+    "name": "green beans",
+    "alias": [
+      "string beans",
+      "snap beans",
+      "french green beans",
+      "haricot verts",
+      "fresh green beans",
+      "trimmed green beans"
+    ]
+  },
+  {
+    "name": "tortilla chips",
+    "alias": [
+      "corn chips",
+      "nacho chips",
+      "fried tortilla chips",
+      "crunchy tortilla chips",
+      "restaurant-style tortilla chips"
+    ]
+  },
+  {
+    "name": "almond flour",
+    "alias": [
+      "ground almond flour",
+      "blanched almond flour",
+      "almond meal",
+      "finely ground almond flour",
+      "almond powder"
+    ]
+  },
+  {
+    "name": "biscuit",
+    "alias": [
+      "flaky biscuit",
+      "buttermilk biscuit",
+      "drop biscuit",
+      "sweet biscuit",
+      "savory biscuit",
+      "scone",
+      "biscuits and gravy"
+    ]
+  },
+  {
+    "name": "oats",
+    "alias": [
+      "rolled oats",
+      "steel-cut oats",
+      "quick oats",
+      "instant oats",
+      "oatmeal",
+      "oat flakes",
+      "whole oats"
+    ]
+  },
+  {
+    "name": "tortilla",
+    "alias": [
+      "flour tortilla",
+      "corn tortilla",
+      "soft tortilla",
+      "whole wheat tortilla",
+      "mini tortilla",
+      "large tortilla",
+      "soft corn tortilla"
+    ]
+  },
+  {
+    "name": "alfredo sauce",
+    "alias": [
+      "creamy alfredo sauce",
+      "white sauce",
+      "garlic alfredo sauce",
+      "parmesan alfredo sauce",
+      "homemade alfredo sauce"
+    ]
+  },
+  {
+    "name": "ramen noodles",
+    "alias": [
+      "instant ramen",
+      "dried ramen noodles",
+      "fresh ramen noodles",
+      "ramen soup noodles",
+      "chinese ramen noodles"
+    ]
+  },
+  {
+    "name": "tortellini",
+    "alias": [
+      "cheese tortellini",
+      "meat tortellini",
+      "spinach tortellini",
+      "stuffed pasta rings",
+      "frozen tortellini",
+      "fresh tortellini"
+    ]
+  },
+  {
+    "name": "taco seasoning",
+    "alias": [
+      "taco spice mix",
+      "taco seasoning mix",
+      "homemade taco seasoning",
+      "spicy taco seasoning",
+      "mild taco seasoning",
+      "seasoned taco mix"
+    ]
+  },
+  {
+    "name": "tomato juice",
+    "alias": [
+      "fresh tomato juice",
+      "canned tomato juice",
+      "spiced tomato juice",
+      "unsalted tomato juice",
+      "V8 tomato juice"
+    ]
+  },
+  {
+    "name": "meatballs",
+    "alias": [
+      "beef meatballs",
+      "pork meatballs",
+      "turkey meatballs",
+      "chicken meatballs",
+      "Italian meatballs",
+      "frozen meatballs",
+      "homemade meatballs"
+    ]
+  },
+  {
+    "name": "zucchini",
+    "alias": [
+      "courgette",
+      "green zucchini",
+      "summer squash"
+    ]
+  },
+  {
+    "name": "eggplant",
+    "alias": [
+      "aubergine",
+      "purple eggplant",
+      "Italian eggplant",
+      "globe eggplant"
+    ]
+  },
+  {
+    "name": "broccoli",
+    "alias": [
+      "broccoli florets",
+      "fresh broccoli",
+      "frozen broccoli"
+    ]
+  },
+  {
+    "name": "chicken broth",
+    "alias": [
+      "chicken stock",
+      "low sodium chicken broth",
+      "reduced sodium chicken broth",
+      "fat-free chicken broth",
+      "homemade chicken broth",
+      "canned chicken broth"
+    ]
+  },
+  {
+    "name": "beef broth",
+    "alias": [
+      "beef stock",
+      "low sodium beef broth",
+      "reduced sodium beef broth",
+      "fat-free beef broth",
+      "homemade beef broth",
+      "canned beef broth"
+    ]
+  },
+  {
+    "name": "vegetable broth",
+    "alias": [
+      "vegetable stock",
+      "low sodium vegetable broth",
+      "reduced sodium vegetable broth",
+      "fat-free vegetable broth",
+      "homemade vegetable broth",
+      "organic vegetable broth"
+    ]
+  },
+  {
+    "name": "cauliflower",
+    "alias": [
+      "cauliflower florets",
+      "white cauliflower",
+      "riced cauliflower"
+    ]
+  },
+  {
+    "name": "cabbage",
+    "alias": [
+      "green cabbage",
+      "red cabbage",
+      "Napa cabbage",
+      "savoy cabbage"
+    ]
+  },
+  {
+    "name": "avocado",
+    "alias": [
+      "hass avocado",
+      "california avocado",
+      "ripe avocado",
+      "avocado pear"
+    ]
+  },
+  {
+    "name": "tomato sauce",
+    "alias": [
+      "canned tomato sauce",
+      "homemade tomato sauce",
+      "marinara sauce",
+      "plain tomato sauce",
+      "Italian tomato sauce",
+      "spaghetti sauce"
+    ]
+  },
+  {
+    "name": "sweet potato",
+    "alias": [
+      "yams",
+      "orange sweet potato",
+      "purple sweet potato",
+      "white sweet potato",
+      "baked sweet potato",
+      "mashed sweet potato",
+      "roasted sweet potato"
+    ]
+  },
+  {
+    "name": "paprika",
+    "alias": [
+      "sweet paprika",
+      "smoked paprika",
+      "hot paprika",
+      "paprika powder"
+    ]
+  },
+  {
+  "name": "orange",
+  "alias": [
+    "navel orange",
+    "blood orange",
+    "valencia orange",
+    "orange zest",
+    "orange juice"
+  ]
+},
+  {
+    "name": "worcestershire",
+    "alias": [
+      "worcestershire sauce",
+      "Lea & Perrins Worcestershire sauce",
+      "vegan worcestershire sauce",
+      "gluten-free worcestershire sauce"
+    ]
+  },
+  {
+    "name": "lettuce",
+    "alias": [
+      "romaine lettuce",
+      "iceberg lettuce",
+      "butter lettuce",
+      "leaf lettuce"
+    ]
+  },
+  {
+    "name": "anchovy paste",
+    "alias": [
+      "anchovy spread",
+      "anchovy paste in a tube",
+      "pureed anchovies",
+      "anchovy concentrate"
+    ]
+  },
+  {
+    "name": "chili powder",
+    "alias": [
+      "chile powder",
+      "ground chili",
+      "Mexican chili powder"
+    ]
+  },
+  {
+    "name": "cumin",
+    "alias": [
+      "ground cumin",
+      "cumin powder",
+      "jeera"
+    ]
+  },
+  {
+    "name": "coriander",
+    "alias": [
+      "ground coriander",
+      "coriander powder",
+      "dhania"
+    ]
+  },
+  {
+    "name": "turmeric",
+    "alias": [
+      "ground turmeric",
+      "haldi",
+      "turmeric powder"
+    ]
+  },
+  {
+    "name": "ginger",
+    "alias": [
+      "fresh ginger",
+      "ground ginger",
+      "ginger root",
+      "ginger paste"
+    ]
+  },
+  {
+    "name": "cinnamon",
+    "alias": [
+      "ground cinnamon",
+      "cinnamon stick",
+      "cassia"
+    ]
+  },
+  {
+    "name": "nutmeg",
+    "alias": [
+      "ground nutmeg",
+      "whole nutmeg"
+    ]
+  },
+  {
+    "name": "cloves",
+    "alias": [
+      "whole cloves",
+      "ground cloves"
+    ]
+  },
+  {
+    "name": "cardamom",
+    "alias": [
+      "green cardamom",
+      "black cardamom",
+      "ground cardamom",
+      "elaichi"
+    ]
+  },
+  {
+    "name": "basil",
+    "alias": [
+      "fresh basil",
+      "dried basil",
+      "sweet basil",
+      "Genovese basil",
+      "basil leaves"
+    ]
+  },
+  {
+    "name": "parsley",
+    "alias": [
+      "flat-leaf parsley",
+      "Italian parsley",
+      "curly parsley"
+    ]
+  },
+  {
+    "name": "thyme",
+    "alias": [
+      "fresh thyme",
+      "dried thyme",
+      "lemon thyme"
+    ]
+  },
+  {
+    "name": "rosemary",
+    "alias": [
+      "fresh rosemary",
+      "dried rosemary",
+      "rosemary sprigs"
+    ]
+  },
+  {
+    "name": "oregano",
+    "alias": [
+      "dried oregano",
+      "fresh oregano",
+      "Mediterranean oregano"
+    ]
+  },
+  {
+    "name": "sage",
+    "alias": [
+      "fresh sage",
+      "dried sage",
+      "ground sage"
+    ]
+  },
+  {
+    "name": "dill",
+    "alias": [
+      "fresh dill",
+      "dried dill",
+      "dill weed"
+    ]
+  },
+  {
+    "name": "bay leaf",
+    "alias": [
+      "dried bay leaf",
+      "fresh bay leaf",
+      "laurel leaf",
+      "bay leaves"
+    ]
+  },
+  {
+    "name": "scallion",
+    "alias": [
+      "green onion",
+      "spring onion"
+    ]
+  },
+  {
+    "name": "chives",
+    "alias": [
+      "fresh chives",
+      "dried chives"
+    ]
+  },
+  {
+    "name": "shallot",
+    "alias": [
+      "French shallot",
+      "banana shallot",
+      "echalion"
+    ]
+  },
+  {
+    "name": "banana pepper",
+    "alias": [
+      "yellow pepper",
+      "mild banana pepper",
+      "pickled banana pepper",
+      "sweet banana pepper",
+      "hot banana pepper",
+      "banana chili"
+    ]
+  },
+  {
+    "name": "gravy",
+    "alias": [
+      "brown gravy",
+      "turkey gravy",
+      "chicken gravy",
+      "beef gravy",
+      "pan gravy",
+      "homemade gravy",
+      "gravy sauce"
+    ]
+  },
+  {
+    "name": "cottage cheese",
+    "alias": [
+      "low-fat cottage cheese",
+      "small curd cottage cheese",
+      "large curd cottage cheese",
+      "nonfat cottage cheese",
+      "creamed cottage cheese",
+      "riced cottage cheese"
+    ]
+  },
+  {
+    "name": "banana",
+    "alias": [
+      "ripe banana",
+      "sliced banana",
+      "mashed banana",
+      "yellow banana",
+      "fresh banana",
+      "overripe banana"
+    ]
+  },
+  {
+    "name": "celery",
+    "alias": [
+      "celery stalk",
+      "celery ribs",
+      "chopped celery"
+    ]
+  },
+  {
+    "name": "croutons",
+    "alias": [
+      "bread croutons",
+      "garlic croutons",
+      "seasoned croutons",
+      "crunchy croutons",
+      "homemade croutons"
+    ]
+  },
+  {
+    "name": "peas",
+    "alias": [
+      "green peas",
+      "sweet peas",
+      "frozen peas",
+      "garden peas"
+    ]
+  },
+  {
+    "name": "corn",
+    "alias": [
+      "sweet corn",
+      "corn kernels",
+      "canned corn",
+      "frozen corn"
+    ]
+  },
+  {
+    "name": "cayenne",
+    "alias": [
+      "cayenne pepper",
+      "ground cayenne",
+      "cayenne spice",
+      "cayenne chili powder",
+      "hot cayenne"
+    ]
+  },
+  {
+    "name": "beans",
+    "alias": [
+      "black beans",
+      "kidney beans",
+      "pinto beans",
+      "cannellini beans"
+    ]
+  },
+  {
+    "name": "orzo",
+    "alias": [
+      "orzo pasta",
+      "rice-shaped pasta",
+      "pilaf pasta"
+    ]
+  },
+  {
+    "name": "lentils",
+    "alias": [
+      "red lentils",
+      "green lentils",
+      "brown lentils",
+      "yellow lentils"
+    ]
+  },
+  {
+    "name": "chickpeas",
+    "alias": [
+      "garbanzo beans",
+      "canned chickpeas",
+      "dried chickpeas"
+    ]
+  },
+  {
+    "name": "quinoa",
+    "alias": [
+      "white quinoa",
+      "red quinoa",
+      "tri-color quinoa"
+    ]
+  },
+  {
+    "name": "oats",
+    "alias": [
+      "rolled oats",
+      "old-fashioned oats",
+      "quick oats",
+      "steel-cut oats"
+    ]
+  },
+  {
+    "name": "barley",
+    "alias": [
+      "pearl barley",
+      "hulled barley",
+      "barley grains"
+    ]
+  },
+  {
+    "name": "polenta",
+    "alias": [
+      "corn grits",
+      "yellow grits",
+      "coarse cornmeal"
+    ]
+  },
+  {
+    "name": "tofu",
+    "alias": [
+      "firm tofu",
+      "silken tofu",
+      "extra firm tofu",
+      "bean curd"
+    ]
+  },
+  {
+    "name": "vermicelli noodles",
+    "alias": [
+      "rice vermicelli",
+      "vermicelli rice noodles",
+      "thin vermicelli",
+      "vermicelli pasta",
+      "Chinese vermicelli",
+      "vermicelli noodles (dry)"
+    ]
+  },
+  {
+    "name": "jerk marinade",
+    "alias": [
+      "Jamaican jerk marinade",
+      "spicy jerk marinade",
+      "homemade jerk marinade",
+      "jerk chicken marinade",
+      "jerk pork marinade"
+    ]
+  },
+  {
+    "name": "nectarine",
+    "alias": [
+      "fresh nectarine",
+      "yellow nectarine",
+      "white nectarine",
+      "nectarine slices",
+      "ripe nectarine"
+    ]
+  },
+  {
+    "name": "arugula",
+    "alias": [
+      "rocket",
+      "rucola",
+      "arugula leaves",
+      "baby arugula",
+      "wild arugula"
+    ]
+  },
+  {
+    "name": "jerk seasoning",
+    "alias": [
+      "jerk spice mix",
+      "jerk seasoning blend",
+      "Jamaican jerk seasoning",
+      "spicy jerk seasoning",
+      "homemade jerk seasoning"
+    ]
+  },
+  {
+    "name": "jalapeño",
+    "alias": [
+      "jalapeno",
+      "fresh jalapeño",
+      "pickled jalapeño",
+      "jalapeño pepper",
+      "green jalapeño"
+    ]
+  },
+  {
+    "name": "tempeh",
+    "alias": [
+      "fermented soy cake",
+      "soy tempeh",
+      "Indonesian tempeh"
+    ]
+  },
+  {
+    "name": "sour cream",
+    "alias": [
+      "light sour cream",
+      "reduced-fat sour cream",
+      "full-fat sour cream",
+      "cultured cream",
+      "dairy sour cream"
+    ]
+  },
+  {
+    "name": "gnocchi",
+    "alias": [
+      "potato gnocchi",
+      "ricotta gnocchi",
+      "frozen gnocchi",
+      "homemade gnocchi",
+      "store-bought gnocchi"
+    ]
+  },
+  {
+    "name": "almonds",
+    "alias": [
+      "raw almonds",
+      "sliced almonds",
+      "slivered almonds",
+      "blanched almonds"
+    ]
+  },
+  {
+    "name": "walnuts",
+    "alias": [
+      "chopped walnuts",
+      "raw walnuts",
+      "toasted walnuts"
+    ]
+  },
+  {
+    "name": "flaked coconut",
+    "alias": [
+      "shredded coconut",
+      "unsweetened flaked coconut",
+      "sweetened flaked coconut",
+      "dried flaked coconut",
+      "coconut flakes"
+    ]
+  },
+  {
+    "name": "maraschino cherries",
+    "alias": [
+      "sweet maraschino cherries",
+      "maraschino cherry stems",
+      "cocktail cherries",
+      "glazed maraschino cherries",
+      "cherry garnish"
+    ]
+  },
+  {
+    "name": "pecans",
+    "alias": [
+      "halved pecans",
+      "chopped pecans",
+      "toasted pecans"
+    ]
+  },
+  {
+    "name": "cashews",
+    "alias": [
+      "raw cashews",
+      "roasted cashews",
+      "salted cashews"
+    ]
+  },
+  {
+    "name": "pie crust",
+    "alias": [
+      "flaky pie crust",
+      "pre-made pie crust",
+      "homemade pie crust",
+      "pie dough",
+      "shortcrust pastry"
+    ]
+  },
+  {
+    "name": "radish",
+    "alias": [
+      "fresh radish",
+      "daikon radish",
+      "red radish",
+      "white radish",
+      "baby radish",
+      "radish root"
+    ]
+  },
+  {
+    "name": "salmon",
+    "alias": [
+      "fresh salmon",
+      "cooked salmon",
+      "smoked salmon",
+      "grilled salmon",
+      "salmon fillets",
+      "salmon steaks",
+      "sushi-grade salmon"
+    ]
+  },
+  {
+    "name": "salsa",
+    "alias": [
+      "tomato salsa",
+      "pico de gallo",
+      "fresh salsa",
+      "salsa verde",
+      "mild salsa",
+      "spicy salsa",
+      "chunky salsa"
+    ]
+  },
+  {
+    "name": "peanuts",
+    "alias": [
+      "roasted peanuts",
+      "salted peanuts",
+      "unsalted peanuts"
+    ]
+  },
+  {
+    "name": "hazelnuts",
+    "alias": [
+      "whole hazelnuts",
+      "toasted hazelnuts",
+      "filberts"
+    ]
+  },
+  {
+    "name": "blueberries",
+    "alias": [
+      "fresh blueberries",
+      "frozen blueberries",
+      "wild blueberries",
+      "dried blueberries",
+      "blueberry berries"
+    ]
+  },
+  {
+    "name": "blackberries",
+    "alias": [
+      "fresh blackberries",
+      "frozen blackberries",
+      "dried blackberries",
+      "wild blackberries",
+      "blackberry fruit"
+    ]
+  },
+  {
+    "name": "raspberries",
+    "alias": [
+      "fresh raspberries",
+      "frozen raspberries",
+      "dried raspberries",
+      "wild raspberries",
+      "red raspberries",
+      "black raspberries"
+    ]
+  },
+  {
+    "name": "cherries",
+    "alias": [
+      "fresh cherries",
+      "frozen cherries",
+      "dried cherries",
+      "sweet cherries",
+      "sour cherries",
+      "cherry fruit"
+    ]
+  },
+  {
+    "name": "strawberries",
+    "alias": [
+      "fresh strawberries",
+      "frozen strawberries",
+      "dried strawberries",
+      "strawberry berries",
+      "wild strawberries",
+      "sliced strawberries"
+    ]
+  },
+  {
+    "name": "pine nuts",
+    "alias": [
+      "pignoli",
+      "toasted pine nuts"
+    ]
+  },
+  {
+    "name": "sesame oil",
+    "alias": [
+      "toasted sesame oil",
+      "light sesame oil",
+      "sesame seed oil"
+    ]
+  },
+  {
+    "name": "sesame seeds",
+    "alias": [
+      "white sesame seeds",
+      "black sesame seeds",
+      "toasted sesame seeds"
+    ]
+  },
+  {
+    "name": "chili oil",
+    "alias": [
+      "chili-infused oil",
+      "spicy oil",
+      "chili garlic oil",
+      "chili sesame oil"
+    ]
+  },
+  {
+    "name": "chia seeds",
+    "alias": [
+      "black chia seeds",
+      "white chia seeds"
+    ]
+  },
+  {
+    "name": "flaxseed",
+    "alias": [
+      "ground flaxseed",
+      "whole flaxseed",
+      "linseed"
+    ]
+  },
+  {
+    "name": "sunflower seeds",
+    "alias": [
+      "raw sunflower seeds",
+      "hulled sunflower seeds",
+      "roasted sunflower seeds"
+    ]
+  },
+  {
+    "name": "pumpkin seeds",
+    "alias": [
+      "pepitas",
+      "hulled pumpkin seeds",
+      "roasted pumpkin seeds"
+    ]
+  },
+  {
+    "name": "raisins",
+    "alias": [
+      "golden raisins",
+      "sultanas",
+      "currants"
+    ]
+  },
+  {
+    "name": "dates",
+    "alias": [
+      "Medjool dates",
+      "Deglet Noor dates",
+      "pitted dates"
+    ]
+  },
+  {
+    "name": "bok choy",
+    "alias": [
+      "baby bok choy",
+      "pak choi",
+      "Chinese cabbage",
+      "choy sum",
+      "Shanghai bok choy"
+    ]
+  },
+  {
+    "name": "bacon",
+    "alias": [
+      "pork bacon",
+      "smoked bacon",
+      "crispy bacon",
+      "turkey bacon",
+      "thick-cut bacon",
+      "bacon bits"
+    ]
+  },
+  {
+    "name": "bagel",
+    "alias": [
+      "plain bagel",
+      "everything bagel",
+      "sesame bagel",
+      "poppy seed bagel",
+      "whole wheat bagel",
+      "garlic bagel",
+      "onion bagel"
+    ]
+  },
+  {
+    "name": "dumplings",
+    "alias": [
+      "potstickers",
+      "wontons",
+      "steamed dumplings",
+      "fried dumplings",
+      "dumpling wrappers",
+      "gyoza"
+    ]
+  },
+  {
+    "name": "cilantro",
+    "alias": [
+      "coriander leaves",
+      "fresh coriander",
+      "Chinese parsley",
+      "dhaniya"
+    ]
+  },
+  {
+    "name": "curry powder",
+    "alias": [
+      "mild curry powder",
+      "hot curry powder",
+      "indian curry powder",
+      "garam masala",
+      "madras curry powder"
+    ]
+  },
+  {
+    "name": "curry paste",
+    "alias": [
+      "red curry paste",
+      "green curry paste",
+      "yellow curry paste",
+      "massaman curry paste",
+      "panang curry paste",
+      "thai curry paste"
+    ]
+  },
+  {
+    "name": "figs",
+    "alias": [
+      "dried figs",
+      "black mission figs",
+      "Turkish figs"
+    ]
+  },
+  {
+    "name": "apricots",
+    "alias": [
+      "dried apricots",
+      "unsulfured apricots"
+    ]
+  },
+  {
+    "name": "coconut",
+    "alias": [
+      "shredded coconut",
+      "desiccated coconut",
+      "flaked coconut",
+      "sweetened coconut"
+    ]
+  },
+  {
+    "name": "chili flake",
+    "alias": [
+      "red pepper flakes",
+      "crushed red pepper",
+      "chili pepper flakes",
+      "crushed chili flakes"
+    ]
+  },
+  {
+    "name": "shrimp",
+    "alias": [
+      "prawns",
+      "jumbo shrimp",
+      "baby shrimp",
+      "shrimp tail",
+      "shrimp meat"
+    ]
+  },
+  {
+    "name": "chilies",
+    "alias": [
+      "chili peppers",
+      "red chilies",
+      "green chilies",
+      "dried chilies",
+      "fresh chilies",
+      "hot peppers",
+      "thai chilies"
+    ]
+  },
+  {
+    "name": "vanilla extract",
+    "alias": [
+      "pure vanilla extract",
+      "imitation vanilla",
+      "vanilla essence"
+    ]
+  },
+  {
+    "name": "chocolate chips",
+    "alias": [
+      "semi-sweet chocolate chips",
+      "dark chocolate chips",
+      "milk chocolate chips",
+      "white chocolate chips"
+    ]
+  },
+  {
+    "name": "cocoa powder",
+    "alias": [
+      "unsweetened cocoa powder",
+      "Dutch-process cocoa",
+      "natural cocoa powder"
+    ]
+  },
+  {
+    "name": "white sugar",
+    "alias": [
+      "granulated sugar",
+      "table sugar",
+      "refined sugar"
+    ]
+  },
+  {
+    "name": "powdered sugar",
+    "alias": [
+      "confectioners' sugar",
+      "icing sugar"
+    ]
+  },
+  {
+    "name": "granola",
+    "alias": [
+      "breakfast granola",
+      "homemade granola",
+      "granola bars",
+      "oat granola",
+      "crunchy granola",
+      "granola clusters"
+    ]
+  },
+  {
+    "name": "molasses",
+    "alias": [
+      "blackstrap molasses",
+      "light molasses",
+      "dark molasses"
+    ]
+  },
+  {
+    "name": "corn syrup",
+    "alias": [
+      "light corn syrup",
+      "dark corn syrup",
+      "Karo syrup"
+    ]
+  },
+  {
+    "name": "agave nectar",
+    "alias": [
+      "agave syrup",
+      "blue agave nectar"
+    ]
+  },
+  {
+    "name": "stevia",
+    "alias": [
+      "stevia extract",
+      "liquid stevia",
+      "stevia powder"
+    ]
+  },
+  {
+    "name": "yeast",
+    "alias": [
+      "active dry yeast",
+      "instant yeast",
+      "bread machine yeast"
+    ]
+  },
+  {
+    "name": "bread",
+    "alias": [
+      "loaf bread",
+      "white bread",
+      "whole wheat bread",
+      "sourdough bread",
+      "rye bread",
+      "multigrain bread",
+      "baguette",
+      "bread rolls",
+      "bread slices"
+    ]
+  },
+  {
+    "name": "corned beef",
+    "alias": [
+      "salted beef",
+      "corned beef brisket",
+      "canned corned beef",
+      "pickled beef",
+      "corned beef slices",
+      "deli corned beef"
+    ]
+  },
+  {
+    "name": "thousand island dressing",
+    "alias": [
+      "creamy thousand island dressing",
+      "thousand island salad dressing",
+      "classic thousand island dressing",
+      "sweet thousand island dressing"
+    ]
+  },
+  {
+    "name": "cream of tartar",
+    "alias": [
+      "potassium bitartrate"
+    ]
+  },
+  {
+    "name": "gelatin",
+    "alias": [
+      "unflavored gelatin",
+      "gelatine",
+      "gelatin powder",
+      "gelatin sheets"
+    ]
+  },
+  {
+    "name": "arrowroot powder",
+    "alias": [
+      "arrowroot flour",
+      "arrowroot starch"
+    ]
+  },
+  {
+    "name": "tapioca starch",
+    "alias": [
+      "tapioca flour",
+      "manioc starch"
+    ]
+  },
+  {
+  "name": "tapioca",
+  "alias": [
+    "tapioca pearls",
+    "sago pearls"
+  ]
+},
+  {
+    "name": "xanthan gum",
+    "alias": [
+      "xantham gum",
+      "xanthan"
+    ]
+  },
+  {
+    "name": "cream cheese",
+    "alias": [
+      "full-fat cream cheese",
+      "light cream cheese",
+      "neufchâtel"
+    ]
+  },
+  {
+    "name": "hamburger buns",
+    "alias": [
+      "burger buns",
+      "soft hamburger buns",
+      "sesame seed hamburger buns",
+      "whole wheat hamburger buns",
+      "toasted hamburger buns"
+    ]
+  },
+  {
+    "name": "ricotta",
+    "alias": [
+      "ricotta cheese",
+      "whole milk ricotta",
+      "part-skim ricotta"
+    ]
+  },
+  {
+    "name": "asparagus",
+    "alias": [
+      "green asparagus",
+      "white asparagus",
+      "purple asparagus",
+      "asparagus spears"
+    ]
+  },
+  {
+    "name": "butternut squash",
+    "alias": [
+      "butternut pumpkin",
+      "winter squash",
+      "roasted butternut squash",
+      "cubed butternut squash",
+      "peeled butternut squash"
+    ]
+  },
+  {
+    "name": "parmesan",
+    "alias": [
+      "parmesan cheese",
+      "parmigiano",
+      "parmigiano-reggiano",
+      "grated parmesan",
+      "shaved parmesan"
+    ]
+  },
+  {
+    "name": "sundried tomatoes",
+    "alias": [
+      "sun-dried tomatoes",
+      "dried tomatoes",
+      "tomato halves",
+      "tomato sun-dried"
+    ]
+  },
+  {
+    "name": "italian seasoning",
+    "alias": [
+      "italian herb mix",
+      "italian herb seasoning",
+      "italian herb blend",
+      "dried italian herbs",
+      "italian spice mix",
+      "cantanzaro herbs"
+    ]
+  },
+  {
+    "name": "ham",
+    "alias": [
+      "cooked ham",
+      "smoked ham",
+      "honey ham",
+      "spiral ham",
+      "ham slices",
+      "ham steak",
+      "shaved ham",
+      "deli ham"
+    ]
+  },
+  {
+    "name": "swiss cheese",
+    "alias": [
+      "Emmental cheese",
+      "Gruyère cheese",
+      "swiss cheese slices",
+      "holey swiss cheese",
+      "Swiss cheese block"
+    ]
+  },
+  {
+    "name": "turkey",
+    "alias": [
+      "ground turkey",
+      "turkey breast",
+      "turkey thighs",
+      "roast turkey",
+      "deli turkey",
+      "smoked turkey",
+      "shredded turkey"
+    ]
+  }
+]
+
+

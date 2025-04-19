@@ -1,26 +1,27 @@
 from ingredient_parser import parse_ingredient, parse_multiple_ingredients
+from typing import Tuple
+
+IGNORED_INGREDIENTS = [
+    "water",
+]
 
 class IngredientNormalizer:
     @staticmethod
-    def trim_ingredient_string(ingredient_string: str) -> str | None:
+    def trim_ingredient_string(ingredient_string: str) -> Tuple[str, str]:
         # Use foundation foods for extra trimming
         parsed_ingredient = parse_ingredient(ingredient_string, foundation_foods=True)
 
-        ingredient_text = ""
+        foundation_text = None
+        ingredient_text = None
+
         # Grab the foundation food if it exists
         if parsed_ingredient.foundation_foods:
-            ingredient_text = parsed_ingredient.foundation_foods[0].text
-            print(f"Foundation food: {ingredient_text}")
+            foundation_text = parsed_ingredient.foundation_foods[0].text
 
-        # If regular ingredient does not exist, return None
-        if not parsed_ingredient.name:
-            print(f"Could not find ingredient name in ingredient string: {ingredient_string}")
-            return None
-        elif ingredient_text == "":
+        if parsed_ingredient.name:
             ingredient_text = parsed_ingredient.name[0].text
-            print(f"Regular ingredient: {ingredient_text}")
 
-        return ingredient_text
+        return ingredient_text, foundation_text
 
 
 
