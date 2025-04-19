@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
+from typing import List, Dict
 
 class IngredientReaderInterface(ABC):
     @abstractmethod
-    def get_and_unroll_ingredients(self):
+    def get_and_unroll_ingredients(self) -> List[str]:
         """
         Retrieves all existing ingredients and their aliases, unrolls them into a single list
         Used for direct string matching
@@ -10,7 +11,7 @@ class IngredientReaderInterface(ABC):
         pass
 
     @abstractmethod
-    def get_all_ingredients(self):
+    def get_all_ingredients(self) -> Dict:
         """
         Retrieves all ingredients but keeps them in format of:
         { "name": "ingredient_name", "alias": [] }
