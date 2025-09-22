@@ -1,6 +1,8 @@
 import json
 from collections import defaultdict
 import os
+from typing import List, Dict
+
 from recipe_manager.ingredient_readers import IngredientReaderInterface
 
 # Path to your JSON file
@@ -8,19 +10,20 @@ project_root = os.getenv("RECIPE_APP_BACKEND_ROOT")
 json_file = os.path.join(project_root, "tests/ingredient_testing/baseline_ingredient_list.json")
 
 
-class RawIngredientReader(IngredientReaderInterface):
+class RawJsonIngredientReader(IngredientReaderInterface):
     def __init__(self):
         self.json_file = json_file
 
-    def get_and_unroll_ingredients(self):
+        # Generate ingredients dict
         with open(self.json_file, 'r') as f:
-            data = json.load(f)
+            self.ingredients_dict = json.load(f)
 
+    def get_and_unroll_ingredients(self):
         # Initialize the final list of ingredients
         ingredient_list = []
 
         # Loop through each ingredient in the JSON
-        for item in data:
+        for item in self.ingredients_dict:
             # Add the ingredient name itself
             ingredient_list.append(item["name"])
 
@@ -29,11 +32,8 @@ class RawIngredientReader(IngredientReaderInterface):
 
         return ingredient_list
 
-    def get_all_ingredients(self):
-        with open(self.json_file, 'r') as f:
-            data = json.load(f)
-
-        return data
+    def get_all_ingredients(self) -> List[Dict]:
+        return self.ingredients_dict
 
 
 def append_ingredient(ingredient_to_add):
@@ -132,7 +132,7 @@ def find_duplicate_ingredients():
 
 
 if __name__ == "__main__":
-    raw_ingredient_reader = RawIngredientReader()
+    raw_ingredient_reader = RawJsonIngredientReader()
 
     unrolled_ingredients = raw_ingredient_reader.get_and_unroll_ingredients()
     print(unrolled_ingredients)

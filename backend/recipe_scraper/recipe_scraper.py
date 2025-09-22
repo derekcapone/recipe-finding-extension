@@ -4,6 +4,7 @@ import os
 import database_driver
 import logging_config, logging
 import recipe_manager
+from recipe_manager.ingredient_normalizer import IngredientNormalizer
 
 # Get logger instance
 logger = logging.getLogger(__name__)
@@ -15,15 +16,21 @@ API_KEY = os.getenv("SPOONACULAR_APP_ID")
 BASE_URL = 'https://api.spoonacular.com'
 
 
-def scrape_and_insert_recipes(num_recipes: int):
-    # Get random recipes and transform to remove unused data
-    random_recipe_list = get_random_recipes(num_recipes)
-    transformed_random_recipes = transform_recipe_structure(random_recipe_list)
+class RecipeScraper:
+    def __init__(self, ingredient_normalizer: IngredientNormalizer):
+        self.ingredient_normalizer = ingredient_normalizer
 
-    # Ensure each recipe link still works before inserting
-    valid_recipe_list = check_and_normalize_recipes(transformed_random_recipes)
 
-    database_driver.insert_recipe_list(valid_recipe_list)
+    def scrape_and_insert_recipes(self, num_recipes: int):
+        # Get random recipes and transform to remove unused data
+        random_recipe_list = get_random_recipes(num_recipes)
+        transformed_random_recipes = transform_recipe_structure(random_recipe_list)
+
+        # Ensure each recipe link still works before inserting
+        valid_recipe_list = check_and_normalize_recipes(transformed_random_recipes)
+        print(valid_recipe_list)
+
+        # database_driver.insert_recipe_list(valid_recipe_list)
 
 
 def check_and_normalize_recipes(recipe_list):
@@ -83,7 +90,7 @@ def transform_recipe_structure(recipe_list_obj: dict):
     return recipes_list
 
 
-def get_random_recipes(num_recipes: int) -> dict:
+def get_random_recipes(num_recipes: int) -> dict | None:
     """
     Scrapes provided number of random recipes from API
     :param num_recipes: Number of recipes to retrieve

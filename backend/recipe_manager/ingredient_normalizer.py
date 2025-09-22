@@ -1,8 +1,7 @@
 from ingredient_parser import parse_ingredient
 from typing import Tuple, List
 from recipe_manager.ingredient_readers import IngredientReaderInterface
-from recipe_manager.sentence_transformer_handler import SentenceTransformerHandler
-from tests.ingredient_testing.ingredient_writer import RawIngredientReader
+from tests.ingredient_testing.raw_json_ingredient_reader import RawJsonIngredientReader
 import logging_config, logging
 
 # Get logger instance
@@ -18,19 +17,16 @@ class IngredientNormalizer:
     This class uses the nlp-ingredient-parser library, for more information on this, see https://ingredient-parser.readthedocs.io/en/latest/
     """
     def __init__(self, ingredient_reader: IngredientReaderInterface):
-        # Keep reference to ingredient reader
         self.ingredient_reader = ingredient_reader
 
         # Generate set of existing ingredient strings for efficient exact string matching
-        self.unrolled_ingredient_strings = set(self.ingredient_reader.get_and_unroll_ingredients())
+        unrolled_ingredient_strings_list = self.ingredient_reader.get_and_unroll_ingredients()
+        self.unrolled_ingredient_strings = set(unrolled_ingredient_strings_list)
 
-        # Generate dict of all ingredients and their aliases
-        self.all_ingredients = self.ingredient_reader.get_all_ingredients()
+        self.all_ingredients = self.ingredient_reader.get_all_ingredients()  # List[dict] of all ingredients and their aliases
+        # self.sentence_transformer = SentenceTransformerHandler()
 
-        # Instantiate SentenceTransformerHandler object
-        self.sentence_transformer = SentenceTransformerHandler()
-
-    def generate_normalize_ingredient_string_list(self, ingredient_string_list: List[str]) -> List[str]:
+    def generate_normalize_ingredient_string_list(self, ingredient_string_list: List[str]) -> Tuple[List[str], List[str]]:
         """
         Takes ingredient_string_list and generates a final normalized ingredients list.
         Iterates through ingredient_string_list and calls generate_normalized_ingredient_string on each tuple.
@@ -41,7 +37,8 @@ class IngredientNormalizer:
         ingredient_string_tuples = self.trim_ingredient_string_list(ingredient_string_list)
 
         normalized_list = []
-        for ingredient_tuple in ingredient_string_tuples:
+        unmatched_ingredient_list = []
+        for ingredient_tuple, ingredient_str in zip(ingredient_string_tuples, ingredient_string_list):
             if ingredient_tuple[0] in IGNORED_INGREDIENTS or ingredient_tuple[1] in IGNORED_INGREDIENTS:
                 # Ignore anything in IGNORED_INGREDIENTS list
                 logger.info(f"Ignored ingredient found: {ingredient_tuple}, skipping.")
@@ -53,13 +50,14 @@ class IngredientNormalizer:
             if not new_normalized_name:
                 # Ingredient match not confidently found. Log warning and continue
                 logger.warning(f"Couldn't find ingredient match for tuple: {ingredient_tuple}")
+                unmatched_ingredient_list.append(ingredient_str)
                 continue
 
             # If match was found, append to our list and continue
             normalized_list.append(new_normalized_name)
-            print(f"For tuple: {ingredient_tuple}, matched string was {new_normalized_name}")
+            print(f"For tuple: {ingredient_tuple}, matched string was '{new_normalized_name}'")
 
-        return normalized_list
+        return normalized_list, unmatched_ingredient_list
 
     def generate_normalized_ingredient_string(self, ingredient_tuple_to_normalize: Tuple[str,str]) -> str | None:
         """
@@ -140,7 +138,10 @@ class IngredientNormalizer:
         return string_to_check in self.unrolled_ingredient_strings
 
 
-
+# TODO implement class
+class SentenceTransformerHandler:
+    def __init__(self, known_ingredients: List[str]):
+        self.sentence_transformer = None
 
 
 if __name__ == "__main__":
@@ -167,8 +168,8 @@ if __name__ == "__main__":
     ]
 
     # Instance of ingredient Normalizer
-    raw_ingredient_reader = RawIngredientReader()
+    raw_ingredient_reader = RawJsonIngredientReader()
     ingredient_normalizer = IngredientNormalizer(raw_ingredient_reader)
 
-    generated_ingredient_string_list = ingredient_normalizer.generate_normalize_ingredient_string_list(ingredient_strings)
+    generated_ingredient_string_list, unmatched_ingredient_list = ingredient_normalizer.generate_normalize_ingredient_string_list(ingredient_strings)
     print("Finished processing ingredient list")

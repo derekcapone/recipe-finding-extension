@@ -11,7 +11,7 @@ class IngredientReaderInterface(ABC):
         pass
 
     @abstractmethod
-    def get_all_ingredients(self) -> Dict:
+    def get_all_ingredients(self) -> List[Dict]:
         """
         Retrieves all ingredients but keeps them in format of:
         { "name": "ingredient_name", "alias": [] }
