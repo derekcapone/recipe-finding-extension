@@ -24,9 +24,11 @@ class IngredientNormalizer:
         self.unrolled_ingredient_strings = set(unrolled_ingredient_strings_list)
 
         self.all_ingredients = self.ingredient_reader.get_all_ingredients()  # List[dict] of all ingredients and their aliases
+
+        # TODO: Implement sentence transformer for contextual matching
         # self.sentence_transformer = SentenceTransformerHandler()
 
-    def generate_normalize_ingredient_string_list(self, ingredient_string_list: List[str]) -> Tuple[List[str], List[str]]:
+    def generate_normalized_ingredient_string_list(self, ingredient_string_list: List[str]) -> Tuple[List[str], List[str]]:
         """
         Takes ingredient_string_list and generates a final normalized ingredients list.
         Iterates through ingredient_string_list and calls generate_normalized_ingredient_string on each tuple.
@@ -58,6 +60,29 @@ class IngredientNormalizer:
             print(f"For tuple: {ingredient_tuple}, matched string was '{new_normalized_name}'")
 
         return normalized_list, unmatched_ingredient_list
+
+    def match_normalized_single_ingredient(self, ingredient_string: str) -> str | None:
+        """
+        Returns ingredient string if found, None if ignored or can't be found.
+        """
+        # First call "trim_ingredient_string" to get Tuple[trimmed ingredient, trimmed foundation ingredient]
+        ingredient_tuple = self.trim_ingredient_string(ingredient_string)
+
+        # Check if ignored ingredient first
+        if ingredient_tuple[0] in IGNORED_INGREDIENTS or ingredient_tuple[1] in IGNORED_INGREDIENTS:
+            # Ignore anything in IGNORED_INGREDIENTS list
+            logger.info(f"Ignored ingredient found: {ingredient_string}, skipping.")
+            return None
+
+        # Attempt to generate normalized name for next tuple
+        new_normalized_name = self.generate_normalized_ingredient_string(ingredient_tuple)
+
+        if not new_normalized_name:
+            error_msg = f"Couldn't find ingredient match for: {ingredient_string}"
+            logger.warning(error_msg)
+            return None
+
+        return new_normalized_name
 
     def generate_normalized_ingredient_string(self, ingredient_tuple_to_normalize: Tuple[str,str]) -> str | None:
         """
@@ -171,5 +196,5 @@ if __name__ == "__main__":
     raw_ingredient_reader = RawJsonIngredientReader()
     ingredient_normalizer = IngredientNormalizer(raw_ingredient_reader)
 
-    generated_ingredient_string_list, unmatched_ingredient_list = ingredient_normalizer.generate_normalize_ingredient_string_list(ingredient_strings)
+    generated_ingredient_string_list, unmatched_ingredient_list = ingredient_normalizer.generate_normalized_ingredient_string_list(ingredient_strings)
     print("Finished processing ingredient list")
