@@ -1,4 +1,5 @@
 import logging
+import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -11,7 +12,7 @@ def setup_logger():
         level=logging.INFO,
         format='%(asctime)s - %(module)s: %(levelname)s - %(message)s',
         handlers=[
-            logging.StreamHandler(),
+            logging.StreamHandler(sys.stdout),
             logging.FileHandler(LOG_FILE)
         ]
     )

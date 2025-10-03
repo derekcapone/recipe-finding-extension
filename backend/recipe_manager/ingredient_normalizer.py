@@ -3,6 +3,8 @@ from typing import Tuple, List
 from recipe_manager.ingredient_readers import IngredientReaderInterface
 from tests.ingredient_testing.raw_json_ingredient_reader import RawJsonIngredientReader
 import logging_config, logging
+from sentence_transformers import SentenceTransformer
+import faiss
 
 # Get logger instance
 logger = logging.getLogger(__name__)
@@ -25,10 +27,9 @@ class IngredientNormalizer:
 
         self.all_ingredients = self.ingredient_reader.get_all_ingredients()  # List[dict] of all ingredients and their aliases
 
-        # TODO: Implement sentence transformer for contextual matching
-        # self.sentence_transformer = SentenceTransformerHandler()
+        self.sentence_transformer = SentenceTransformerHandler(unrolled_ingredient_strings_list)
 
-    def generate_normalized_ingredient_string_list(self, ingredient_string_list: List[str]) -> Tuple[List[str], List[str]]:
+    def generate_normalized_ingredients(self, ingredient_strings: List[str] | str) -> Tuple[List[str], List[str]]:
         """
         Takes ingredient_string_list and generates a final normalized ingredients list.
         Iterates through ingredient_string_list and calls generate_normalized_ingredient_string on each tuple.
@@ -36,61 +37,41 @@ class IngredientNormalizer:
         If any values are None, this means that the ingredient could not be normalized confidently.
         """
         # First generate the ingredient string tuples by trimming/parsing provided ingredient list
-        ingredient_string_tuples = self.trim_ingredient_string_list(ingredient_string_list)
+        list_to_parse = [ingredient_strings] if not isinstance(ingredient_strings, List) else ingredient_strings
+        ingredient_string_tuples = self.trim_ingredient_string_list(list_to_parse)
 
         normalized_list = []
         unmatched_ingredient_list = []
-        for ingredient_tuple, ingredient_str in zip(ingredient_string_tuples, ingredient_string_list):
+        for ingredient_tuple, ingredient_str in zip(ingredient_string_tuples, list_to_parse):
             if ingredient_tuple[0] in IGNORED_INGREDIENTS or ingredient_tuple[1] in IGNORED_INGREDIENTS:
                 # Ignore anything in IGNORED_INGREDIENTS list
                 logger.info(f"Ignored ingredient found: {ingredient_tuple}, skipping.")
                 continue
 
-            # Attempt to generate normalized name for next tuple
-            new_normalized_name = self.generate_normalized_ingredient_string(ingredient_tuple)
+            # Attempt to generate normalized name
+            new_normalized_name = self.check_exact_ingredient_string_match(ingredient_tuple)
+
+            if not new_normalized_name:
+                # No exact match, try other methods of matching
+                new_normalized_name = self.contextual_ingredient_match(ingredient_str, ingredient_tuple[0], ingredient_tuple[1])
 
             if not new_normalized_name:
                 # Ingredient match not confidently found. Log warning and continue
-                logger.warning(f"Couldn't find ingredient match for tuple: {ingredient_tuple}")
+                logger.warning(f"Couldn't find ingredient match for tuple: {ingredient_str}")
                 unmatched_ingredient_list.append(ingredient_str)
                 continue
 
             # If match was found, append to our list and continue
             normalized_list.append(new_normalized_name)
-            print(f"For tuple: {ingredient_tuple}, matched string was '{new_normalized_name}'")
+            logger.debug(f"For tuple: {ingredient_tuple}, matched string was '{new_normalized_name}'")
 
         return normalized_list, unmatched_ingredient_list
 
-    def match_normalized_single_ingredient(self, ingredient_string: str) -> str | None:
-        """
-        Returns ingredient string if found, None if ignored or can't be found.
-        """
-        # First call "trim_ingredient_string" to get Tuple[trimmed ingredient, trimmed foundation ingredient]
-        ingredient_tuple = self.trim_ingredient_string(ingredient_string)
-
-        # Check if ignored ingredient first
-        if ingredient_tuple[0] in IGNORED_INGREDIENTS or ingredient_tuple[1] in IGNORED_INGREDIENTS:
-            # Ignore anything in IGNORED_INGREDIENTS list
-            logger.info(f"Ignored ingredient found: {ingredient_string}, skipping.")
-            return None
-
-        # Attempt to generate normalized name for next tuple
-        new_normalized_name = self.generate_normalized_ingredient_string(ingredient_tuple)
-
-        if not new_normalized_name:
-            error_msg = f"Couldn't find ingredient match for: {ingredient_string}"
-            logger.warning(error_msg)
-            return None
-
-        return new_normalized_name
-
-    def generate_normalized_ingredient_string(self, ingredient_tuple_to_normalize: Tuple[str,str]) -> str | None:
+    def check_exact_ingredient_string_match(self, ingredient_tuple_to_normalize: Tuple[str,str]) -> str | None:
         """
         Generates a normalized ingredient string based on the passed in ingredient string.
         Prioritizes regular ingredient name over foundational ingredient name
         """
-        normalized_string = None
-
         # First check the regular ingredient string for an exact match in the unrolled_ingredient_strings set
         if ingredient_tuple_to_normalize[0] and self.exact_ingredient_match(ingredient_tuple_to_normalize[0]):
             # If match found, we then need to find the top level ingredient string to ensure this isn't an alias match
@@ -101,10 +82,7 @@ class IngredientNormalizer:
             # If match found, we then need to find the top level ingredient string to ensure this isn't an alias match
             return self.find_top_level_ingredient_name(ingredient_tuple_to_normalize[1])
 
-        # If an exact match was not found, we need to perform more contextual string processing
-        # TODO: Perform sentence transformer cosine similarity matching here. Should probably be a different class.
-
-        return normalized_string
+        return None  # Nothing found, return None
 
     def find_top_level_ingredient_name(self, ingredient_to_find: str) -> str:
         """
@@ -162,11 +140,79 @@ class IngredientNormalizer:
         """
         return string_to_check in self.unrolled_ingredient_strings
 
+    def contextual_ingredient_match(self, *args) -> str | None:
+        highest_score = 0
+        best_matched_string = None
+        for ingredient in args:
+            if ingredient is None or type(ingredient) is not str:
+                # Ignore if type is incorrect or if value is None.
+                continue
 
-# TODO implement class
+            matched_string, score = self.sentence_transformer.search_ingredient(ingredient)
+
+            if matched_string is None:
+                # Score wasn't high enough, next iteration.
+                continue
+
+            if score > highest_score:
+                highest_score = score
+                best_matched_string = matched_string
+
+        if not best_matched_string:
+            # Nothing found, return None
+            return None
+
+        # Find and return top-level ingredient name
+        logger.info(f"Contextal match: best score is for '{args}' is {best_matched_string} with cosine score: {highest_score}")
+        normalized_string = self.find_top_level_ingredient_name(best_matched_string)
+        return normalized_string
+
+
 class SentenceTransformerHandler:
+    COSINE_SIMILARITY_THRESHOLD = 0.5
+
     def __init__(self, known_ingredients: List[str]):
-        self.sentence_transformer = None
+        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+
+        self.known_ingredients = known_ingredients  # Keep reference to ingredient list
+
+        # Pre-encode ingredient embeddings
+        self.ingredient_embeddings = self.model.encode(
+            known_ingredients,
+            convert_to_numpy=True,
+            normalize_embeddings=True,
+            show_progress_bar=False
+        ).astype("float32")
+
+        # Build FAISS index for cosine similarity search for all known ingredients.
+        self.index = faiss.IndexFlatIP(self.ingredient_embeddings.shape[1])
+        self.index.add(self.ingredient_embeddings)
+
+    def search_ingredient(self, query, k=5, debug_print=False) -> Tuple[str, float] | Tuple[None, None]:
+        # Encode query embedding
+        query_embedding = self.model.encode(
+            [query],
+            convert_to_numpy=True,
+            normalize_embeddings=True,
+            show_progress_bar=False
+        ).astype("float32")
+
+        # FAISS similarity search
+        scores, indices = self.index.search(query_embedding, k)
+
+        if debug_print:
+            print(f"\nQuery: '{query}'")
+            for rank, (score, idx) in enumerate(zip(scores[0], indices[0]), start=1):
+                print(f"{rank}. {self.known_ingredients[idx]} (score: {score:.4f})")
+
+        # Filter out anything below score threshold
+        highest_score = scores[0][0]
+        if highest_score < self.COSINE_SIMILARITY_THRESHOLD:
+            return None, None
+
+        # Return string with the highest score and the score value
+        highest_score_idx = indices[0][0]
+        return self.known_ingredients[highest_score_idx], highest_score
 
 
 if __name__ == "__main__":
@@ -189,12 +235,13 @@ if __name__ == "__main__":
         "2 pounds 85% lean ground beef",
         "1 (12-ounce) package frozen mixed vegetables",
         "1 1/2 cups lower-sodium beef broth",
-        "6 green olives"
+        "6 green olives",
+        "parmigiano reggiano"
     ]
 
     # Instance of ingredient Normalizer
     raw_ingredient_reader = RawJsonIngredientReader()
     ingredient_normalizer = IngredientNormalizer(raw_ingredient_reader)
 
-    generated_ingredient_string_list, unmatched_ingredient_list = ingredient_normalizer.generate_normalized_ingredient_string_list(ingredient_strings)
-    print("Finished processing ingredient list")
+    generated_ingredient_string_list, unmatched_ingredient_list = ingredient_normalizer.generate_normalized_ingredients(ingredient_strings)
+    print(generated_ingredient_string_list)

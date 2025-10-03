@@ -1,9 +1,6 @@
 import requests
-import json
 import os
-import database_driver
 import logging_config, logging
-import recipe_manager
 from recipe_manager.ingredient_normalizer import IngredientNormalizer
 from tests.ingredient_testing.raw_json_ingredient_reader import RawJsonIngredientReader
 
@@ -104,7 +101,9 @@ class RecipeScraper:
         new_ingredients = []
         for ingredient in recipe_dict["ingredients"]:
             # Normalize and append ingredient names
-            ingredient_name = self.ingredient_normalizer.match_normalized_single_ingredient(ingredient)
+            # TODO Verify that new method works here
+            ingredient_names, _ = self.ingredient_normalizer.generate_normalized_ingredients(ingredient)
+            ingredient_name = ingredient_names[0]
 
             if ingredient_name is not None:
                 new_ingredients.append(ingredient_name)
