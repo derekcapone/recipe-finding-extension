@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Request
 import logging_config, logging
-import database_driver
 import recipe_manager
 import json
 from fastapi.middleware.cors import CORSMiddleware
+from recipe_manager.mongodb_driver import DatabaseDriver
 
 app = FastAPI()
 logger = logging.getLogger(__name__)
@@ -15,6 +15,8 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
+
+database_driver = DatabaseDriver()
 
 # Route to handle GET requests for "get_recipes"
 @app.get('/get_recipes')

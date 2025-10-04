@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from ingredient_parser import parse_ingredient
 from typing import Tuple, List
 from recipe_manager.ingredient_readers import IngredientReaderInterface
@@ -14,6 +16,9 @@ IGNORED_INGREDIENTS = [
 ]
 
 class IngredientNormalizer:
+    MATCHED_INGREDIENT_LOG_FILE = Path("contextual_matched_ingredients.log")
+    OVERWRITE_LOG_FILE = True  # Removes existing log file when instantiated if True. Easier for debugging.
+
     """
     Class to handle normalizing ingredient strings
     This class uses the nlp-ingredient-parser library, for more information on this, see https://ingredient-parser.readthedocs.io/en/latest/
@@ -28,6 +33,9 @@ class IngredientNormalizer:
         self.all_ingredients = self.ingredient_reader.get_all_ingredients()  # List[dict] of all ingredients and their aliases
 
         self.sentence_transformer = SentenceTransformerHandler(unrolled_ingredient_strings_list)
+
+        if IngredientNormalizer.OVERWRITE_LOG_FILE:
+            IngredientNormalizer.MATCHED_INGREDIENT_LOG_FILE.unlink(missing_ok=True)
 
     def generate_normalized_ingredients(self, ingredient_strings: List[str] | str) -> Tuple[List[str], List[str]]:
         """
@@ -162,14 +170,18 @@ class IngredientNormalizer:
             # Nothing found, return None
             return None
 
+        with open(IngredientNormalizer.MATCHED_INGREDIENT_LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(f"Contextal match: best score is for '{args}' is {best_matched_string} with cosine score: {highest_score}\n")
+
         # Find and return top-level ingredient name
-        logger.info(f"Contextal match: best score is for '{args}' is {best_matched_string} with cosine score: {highest_score}")
         normalized_string = self.find_top_level_ingredient_name(best_matched_string)
         return normalized_string
 
 
 class SentenceTransformerHandler:
-    COSINE_SIMILARITY_THRESHOLD = 0.5
+    COSINE_SIMILARITY_THRESHOLD = 0.75
+    UNKNOWN_INGREDIENT_LOG_FILE = Path("unknown_ingredients_scores.log")
+    OVERWRITE_LOG_FILE = True  # Removes existing log file when instantiated if True. Easier for debugging.
 
     def __init__(self, known_ingredients: List[str]):
         self.model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -188,6 +200,9 @@ class SentenceTransformerHandler:
         self.index = faiss.IndexFlatIP(self.ingredient_embeddings.shape[1])
         self.index.add(self.ingredient_embeddings)
 
+        if SentenceTransformerHandler.OVERWRITE_LOG_FILE:
+            SentenceTransformerHandler.UNKNOWN_INGREDIENT_LOG_FILE.unlink(missing_ok=True)
+
     def search_ingredient(self, query, k=5, debug_print=False) -> Tuple[str, float] | Tuple[None, None]:
         # Encode query embedding
         query_embedding = self.model.encode(
@@ -205,14 +220,27 @@ class SentenceTransformerHandler:
             for rank, (score, idx) in enumerate(zip(scores[0], indices[0]), start=1):
                 print(f"{rank}. {self.known_ingredients[idx]} (score: {score:.4f})")
 
-        # Filter out anything below score threshold
+        # Filter out anything below score threshold.
         highest_score = scores[0][0]
         if highest_score < self.COSINE_SIMILARITY_THRESHOLD:
+            log_string = f"QUERY FOR INGREDIENT: '{query}'\n"
+            for rank, (score, idx) in enumerate(zip(scores[0], indices[0]), start=1):
+                log_string += f"{rank}. {self.known_ingredients[idx]} (score: {score:.4f})\n"
+            log_string += "\n\n"
+            self.log_ingredient_miss(log_string, write_to_console=True)
             return None, None
 
         # Return string with the highest score and the score value
         highest_score_idx = indices[0][0]
         return self.known_ingredients[highest_score_idx], highest_score
+
+    @staticmethod
+    def log_ingredient_miss(log_message: str, write_to_console: bool = False):
+        if write_to_console:
+            print(log_message)
+
+        with open(SentenceTransformerHandler.UNKNOWN_INGREDIENT_LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(log_message)
 
 
 if __name__ == "__main__":
@@ -236,7 +264,8 @@ if __name__ == "__main__":
         "1 (12-ounce) package frozen mixed vegetables",
         "1 1/2 cups lower-sodium beef broth",
         "6 green olives",
-        "parmigiano reggiano"
+        "parmigiano reggiano",
+        "somerandomingredient sasdf"
     ]
 
     # Instance of ingredient Normalizer

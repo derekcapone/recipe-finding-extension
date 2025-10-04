@@ -413,7 +413,8 @@
       "Gala apple",
       "Honeycrisp apple",
       "sliced apple",
-      "fresh apple"
+      "fresh apple",
+      "apples"
     ]
   },
   {
@@ -557,7 +558,8 @@
     "alias": [
       "mayo",
       "real mayonnaise",
-      "light mayonnaise"
+      "light mayonnaise",
+      "reduced fat mayo"
     ]
   },
   {
@@ -611,7 +613,8 @@
     "alias": [
       "English cucumber",
       "slicing cucumber",
-      "garden cucumber"
+      "garden cucumber",
+      "persian cucumbers"
     ]
   },
   {
@@ -976,7 +979,8 @@
       "green cardamom",
       "black cardamom",
       "ground cardamom",
-      "elaichi"
+      "elaichi",
+      "cardamon powder"
     ]
   },
   {
@@ -1801,7 +1805,8 @@
       "multigrain bread",
       "baguette",
       "bread rolls",
-      "bread slices"
+      "bread slices",
+      "crescent rolls"
     ]
   },
   {
@@ -1975,6 +1980,193 @@
       "deli turkey",
       "smoked turkey",
       "shredded turkey"
+    ]
+  },
+  {
+    "name": "feta cheese",
+    "alias": [
+      "crumbled feta",
+      "Greek feta",
+      "sheep's milk feta",
+      "goat's milk feta",
+      "marinated feta",
+      "feta crumbles"
+    ]
+  },
+  {
+    "name": "marjoram",
+    "alias": [
+      "dried marjoram",
+      "fresh marjoram",
+      "sweet marjoram",
+      "marjoram leaves",
+      "oregano marjoram"
+    ]
+  },
+  {
+    "name": "grape juice",
+    "alias": [
+      "purple grape juice",
+      "white grape juice",
+      "fresh grape juice",
+      "concord grape juice",
+      "organic grape juice",
+      "unsweetened grape juice"
+    ]
+  },
+  {
+    "name": "raspberry jam",
+    "alias": [
+      "raspberry preserves",
+      "raspberry spread",
+      "homemade raspberry jam",
+      "seeded raspberry jam",
+      "smooth raspberry jam"
+    ]
+  },
+  {
+    "name": "kefir",
+    "alias": [
+      "fermented milk",
+      "kefir milk",
+      "plain kefir",
+      "flavored kefir",
+      "kefir yogurt",
+      "drinkable yogurt"
+    ]
+  },
+  {
+    "name": "pudding mix",
+    "alias": [
+      "instant pudding mix",
+      "chocolate pudding mix",
+      "vanilla pudding mix",
+      "ready-to-make pudding mix",
+      "custard mix"
+    ]
+  },
+  {
+    "name": "eggnog",
+    "alias": [
+      "traditional eggnog",
+      "homemade eggnog",
+      "holiday eggnog",
+      "dairy eggnog",
+      "spiced eggnog",
+      "non-alcoholic eggnog"
+    ]
+  },
+  {
+    "name": "ghee",
+    "alias": [
+      "clarified butter",
+      "Indian ghee",
+      "pure ghee",
+      "cooked butterfat",
+      "homemade ghee"
+    ]
+  },
+  {
+    "name": "oreo cookies",
+    "alias": [
+      "Oreo",
+      "chocolate sandwich cookies",
+      "creme-filled cookies",
+      "double-stuffed Oreos",
+      "vanilla creme Oreos"
+    ]
+  },
+  {
+    "name": "asafetida",
+    "alias": [
+      "hing",
+      "asafoetida",
+      "powdered asafetida",
+      "ground asafetida",
+      "Indian asafetida"
+    ]
+  },
+  {
+    "name": "herbes de Provence",
+    "alias": [
+      "Provençal herbs",
+      "dried herbes de Provence",
+      "herb blend",
+      "French herb mix",
+      "herbes Provence"
+    ]
+  },
+  {
+    "name": "enchilada sauce",
+    "alias": [
+      "red enchilada sauce",
+      "green enchilada sauce",
+      "mild enchilada sauce",
+      "spicy enchilada sauce",
+      "homemade enchilada sauce"
+    ]
+  },
+  {
+    "name": "chicken seasoning",
+    "alias": [
+      "poultry seasoning",
+      "homemade chicken seasoning",
+      "chicken spice blend",
+      "garlic chicken seasoning",
+      "herbed chicken seasoning"
+    ]
+  },
+  {
+    "name": "liquid smoke",
+    "alias": [
+      "smoke flavoring",
+      "hickory liquid smoke",
+      "mesquite liquid smoke",
+      "smoky flavor",
+      "smoke essence"
+    ]
+  },
+  {
+    "name": "mango",
+    "alias": [
+      "ripe mango",
+      "fresh mango",
+      "diced mango",
+      "mango slices",
+      "frozen mango",
+      "mango puree"
+    ]
+  },
+  {
+    "name": "almond extract",
+    "alias": [
+      "pure almond extract",
+      "imitation almond extract",
+      "bitter almond extract",
+      "almond flavoring",
+      "liquid almond extract"
+    ]
+  },
+  {
+    "name": "mint",
+    "alias": [
+      "fresh mint",
+      "peppermint",
+      "spearmint",
+      "mint leaves",
+      "ground mint",
+      "dried mint"
+    ]
+  },
+  {
+    "name": "pork tenderloin",
+    "alias": [
+      "pork fillet",
+      "pork loin",
+      "center-cut pork tenderloin",
+      "whole pork tenderloin",
+      "boneless pork tenderloin",
+      "pork medallions"
     ]
   }
 ]
