@@ -28,9 +28,7 @@ class RecipeScraper:
         random_recipe_list = self.get_random_recipes(num_recipes)
         transformed_random_recipes = self.transform_recipe_structure(random_recipe_list)
 
-        # Ensure each recipe link still works before inserting
         valid_recipe_list = self.check_and_normalize_recipes(transformed_random_recipes)
-
         self.database_driver.insert_recipe_list(valid_recipe_list)
 
     def get_random_recipes(self, num_recipes: int) -> dict | None:
@@ -66,14 +64,18 @@ class RecipeScraper:
         :param recipe_list_obj: list of recipes with API schema
         :return: List of recipes ready to be inserted into DB
         """
-        recipes_list = [
-            {
+        recipes_list = []
+        for recipe in recipe_list_obj["recipes"]:
+            if self.database_driver.recipe_already_in_db(recipe["sourceUrl"]):
+                logger.warning(f"Recipe with URL '{recipe["sourceUrl"]}' already exists.")
+                continue
+
+            new_recipe = {
                 "recipe_name": recipe["title"],
                 "source_url": recipe["sourceUrl"],
                 "ingredients": sorted([ingredient["name"] for ingredient in recipe["extendedIngredients"]])
             }
-            for recipe in recipe_list_obj["recipes"]
-        ]
+            recipes_list.append(new_recipe)
         return recipes_list
 
     def check_and_normalize_recipes(self, recipe_list):
@@ -116,6 +118,7 @@ class RecipeScraper:
                 new_ingredients.append(ingredient_name)
             else:
                 number_unknown_ingredients += 1  # Ingredient unknown, add to running count
+                new_ingredients.append(ingredient)  # Still add ingredient, just won't match with anything
 
         if number_unknown_ingredients >= RecipeScraper.MAXIMUM_NUMBER_UNKNOWN_INGREDIENTS:
             error_msg = f"Exceeded maximum number of unknown ingredients ({RecipeScraper.MAXIMUM_NUMBER_UNKNOWN_INGREDIENTS}) for this recipe"

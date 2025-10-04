@@ -94,7 +94,7 @@ class DatabaseDriver:
             "alias": []
         }
 
-        result = self.normalized_ingredients_collection.insert_one(new_normalized_ingredient)
+        self.normalized_ingredients_collection.insert_one(new_normalized_ingredient)
 
     def insert_config_item(self, item_name: str, dict_to_insert: dict):
         if type(dict_to_insert) is not dict:
@@ -135,6 +135,10 @@ class DatabaseDriver:
         ]
         return list(self.recipe_collection.aggregate(pipeline))
 
+    def recipe_already_in_db(self, url_to_check: str) -> bool:
+        """Checks if item already exists in database by comparing the URL."""
+        return self.recipe_collection.find_one({"source_url": url_to_check}) is not None
+
     @staticmethod
     def get_cloud_connection_client() -> MongoClient:
         username = os.getenv("MONGO_USER")
@@ -161,6 +165,3 @@ class DatabaseDriver:
 if __name__ == "__main__":
     new_ingredients = ["almond extract", "blueberry jam", "raspberry jam", "strawberry jam", "fig jam"]
     db_driver = DatabaseDriver()
-
-    for ingredient in new_ingredients:
-        db_driver.insert_normalized_ingredient(ingredient)

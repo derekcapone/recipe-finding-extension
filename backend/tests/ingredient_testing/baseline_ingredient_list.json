@@ -228,7 +228,8 @@
       "beef chuck",
       "ground chuck",
       "beef sirloin",
-      "beef brisket"
+      "beef brisket",
+      "stew meat"
     ]
   },
   {
@@ -2167,6 +2168,50 @@
       "whole pork tenderloin",
       "boneless pork tenderloin",
       "pork medallions"
+    ]
+  },
+  {
+    "name": "applesauce",
+    "alias": [
+      "unsweetened applesauce",
+      "sweetened applesauce",
+      "homemade applesauce",
+      "apple puree",
+      "spiced applesauce",
+      "chunky applesauce"
+    ]
+  },
+  {
+    "name": "peanut butter",
+    "alias": [
+      "creamy peanut butter",
+      "crunchy peanut butter",
+      "smooth peanut butter",
+      "natural peanut butter",
+      "salted peanut butter",
+      "unsalted peanut butter"
+    ]
+  },
+  {
+    "name": "cream of mushroom soup",
+    "alias": [
+      "condensed cream of mushroom soup",
+      "canned cream of mushroom soup",
+      "mushroom soup base",
+      "creamy mushroom soup",
+      "Campbell's cream of mushroom soup",
+      "homemade cream of mushroom soup"
+    ]
+  },
+  {
+    "name": "goat cheese",
+    "alias": [
+      "chèvre",
+      "soft goat cheese",
+      "fresh goat cheese",
+      "crumbled goat cheese",
+      "aged goat cheese",
+      "goat milk cheese"
     ]
   }
 ]
